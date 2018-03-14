@@ -1,0 +1,194 @@
+fileFormatVersion: 2
+guid: 9c14d1a8aeb0242ee89fb82ec6e64ce9
+timeCreated: 1509402956
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Cathedra_carpeted_floor
+    100002: //RootNode
+    100004: Cathedral_arch_left
+    100006: Cathedral_arch_right
+    100008: Cathedral_circular_windows_large
+    100010: Cathedral_circular_windows_small
+    100012: Cathedral_dome
+    100014: Cathedral_entrance
+    100016: Cathedral_floor
+    100018: Cathedral_octagonal_walls
+    100020: Cathedral_octagonal_windows
+    100022: Cathedral_pillars
+    100024: Cathedral_roof
+    100026: Cathedral_sanctuary_wall
+    100028: Cathedral_tower_walls
+    100030: Cathedral_upper_level_floor
+    100032: Cathedral_wall_back
+    100034: Cathedral_wall_front
+    100036: Cathedral_wall_left
+    100038: Cathedral_wall_right
+    100040: Cathedral_windows_left
+    100042: cathedral_windows_right
+    100044: Cathedral_winodws_back
+    400000: Cathedra_carpeted_floor
+    400002: //RootNode
+    400004: Cathedral_arch_left
+    400006: Cathedral_arch_right
+    400008: Cathedral_circular_windows_large
+    400010: Cathedral_circular_windows_small
+    400012: Cathedral_dome
+    400014: Cathedral_entrance
+    400016: Cathedral_floor
+    400018: Cathedral_octagonal_walls
+    400020: Cathedral_octagonal_windows
+    400022: Cathedral_pillars
+    400024: Cathedral_roof
+    400026: Cathedral_sanctuary_wall
+    400028: Cathedral_tower_walls
+    400030: Cathedral_upper_level_floor
+    400032: Cathedral_wall_back
+    400034: Cathedral_wall_front
+    400036: Cathedral_wall_left
+    400038: Cathedral_wall_right
+    400040: Cathedral_windows_left
+    400042: cathedral_windows_right
+    400044: Cathedral_winodws_back
+    2300000: Cathedra_carpeted_floor
+    2300002: Cathedral_arch_left
+    2300004: Cathedral_arch_right
+    2300006: Cathedral_circular_windows_large
+    2300008: Cathedral_circular_windows_small
+    2300010: Cathedral_dome
+    2300012: Cathedral_entrance
+    2300014: Cathedral_floor
+    2300016: Cathedral_octagonal_walls
+    2300018: Cathedral_octagonal_windows
+    2300020: Cathedral_pillars
+    2300022: Cathedral_roof
+    2300024: Cathedral_sanctuary_wall
+    2300026: Cathedral_tower_walls
+    2300028: Cathedral_upper_level_floor
+    2300030: Cathedral_wall_back
+    2300032: Cathedral_wall_front
+    2300034: Cathedral_wall_left
+    2300036: Cathedral_wall_right
+    2300038: Cathedral_windows_left
+    2300040: cathedral_windows_right
+    2300042: Cathedral_winodws_back
+    3300000: Cathedra_carpeted_floor
+    3300002: Cathedral_arch_left
+    3300004: Cathedral_arch_right
+    3300006: Cathedral_circular_windows_large
+    3300008: Cathedral_circular_windows_small
+    3300010: Cathedral_dome
+    3300012: Cathedral_entrance
+    3300014: Cathedral_floor
+    3300016: Cathedral_octagonal_walls
+    3300018: Cathedral_octagonal_windows
+    3300020: Cathedral_pillars
+    3300022: Cathedral_roof
+    3300024: Cathedral_sanctuary_wall
+    3300026: Cathedral_tower_walls
+    3300028: Cathedral_upper_level_floor
+    3300030: Cathedral_wall_back
+    3300032: Cathedral_wall_front
+    3300034: Cathedral_wall_left
+    3300036: Cathedral_wall_right
+    3300038: Cathedral_windows_left
+    3300040: cathedral_windows_right
+    3300042: Cathedral_winodws_back
+    4300000: Cathedral_circular_windows_large
+    4300002: Cathedral_upper_level_floor
+    4300004: cathedral_windows_right
+    4300006: Cathedral_wall_right
+    4300008: Cathedral_tower_walls
+    4300010: Cathedral_windows_left
+    4300012: Cathedral_floor
+    4300014: Cathedral_circular_windows_small
+    4300016: Cathedral_winodws_back
+    4300018: Cathedral_wall_left
+    4300020: Cathedral_wall_back
+    4300022: Cathedral_arch_right
+    4300024: Cathedral_octagonal_windows
+    4300026: Cathedral_octagonal_walls
+    4300028: Cathedral_wall_front
+    4300030: Cathedral_entrance
+    4300032: Cathedral_roof
+    4300034: Cathedral_pillars
+    4300036: Cathedral_sanctuary_wall
+    4300038: Cathedral_dome
+    4300040: Cathedral_arch_left
+    4300042: Cathedra_carpeted_floor
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

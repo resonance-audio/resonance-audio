@@ -1,0 +1,129 @@
+fileFormatVersion: 2
+guid: e1ed47237ac53480fb980bdcb6cf98a4
+timeCreated: 1508959530
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Cave_ground_rocks_mesh671066756
+    100004: Cave_left_grass
+    100006: Cave_left_wall_rocks_mesh1047636353
+    100008: Cave_right_grass
+    100010: Cave_right_wall_rocks_mesh1111335253
+    100012: Cave_roof_grass_mesh2049783935
+    100014: Cave_roof_rocks_mesh1671372048
+    100016: Cave_stalactite_ground_mesh1253478651
+    100018: Cave_stalactite_top_mesh1064773130
+    400000: //RootNode
+    400002: Cave_ground_rocks_mesh671066756
+    400004: Cave_left_grass
+    400006: Cave_left_wall_rocks_mesh1047636353
+    400008: Cave_right_grass
+    400010: Cave_right_wall_rocks_mesh1111335253
+    400012: Cave_roof_grass_mesh2049783935
+    400014: Cave_roof_rocks_mesh1671372048
+    400016: Cave_stalactite_ground_mesh1253478651
+    400018: Cave_stalactite_top_mesh1064773130
+    2300000: Cave_ground_rocks_mesh671066756
+    2300002: Cave_left_grass
+    2300004: Cave_left_wall_rocks_mesh1047636353
+    2300006: Cave_right_grass
+    2300008: Cave_right_wall_rocks_mesh1111335253
+    2300010: Cave_roof_grass_mesh2049783935
+    2300012: Cave_roof_rocks_mesh1671372048
+    2300014: Cave_stalactite_ground_mesh1253478651
+    2300016: Cave_stalactite_top_mesh1064773130
+    3300000: Cave_ground_rocks_mesh671066756
+    3300002: Cave_left_grass
+    3300004: Cave_left_wall_rocks_mesh1047636353
+    3300006: Cave_right_grass
+    3300008: Cave_right_wall_rocks_mesh1111335253
+    3300010: Cave_roof_grass_mesh2049783935
+    3300012: Cave_roof_rocks_mesh1671372048
+    3300014: Cave_stalactite_ground_mesh1253478651
+    3300016: Cave_stalactite_top_mesh1064773130
+    4300000: Cave_right_grass
+    4300002: Cave_stalactite_top_mesh1064773130
+    4300004: Cave_left_grass
+    4300006: Cave_left_wall_rocks_mesh1047636353
+    4300008: Cave_right_wall_rocks_mesh1111335253
+    4300010: Cave_stalactite_ground_mesh1253478651
+    4300012: Cave_ground_rocks_mesh671066756
+    4300014: Cave_roof_grass_mesh2049783935
+    4300016: Cave_roof_rocks_mesh1671372048
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

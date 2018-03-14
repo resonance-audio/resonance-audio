@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: e91c52086b1d1414a9039670ee12b0a9
+timeCreated: 1509402798
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bathroom_bathtub
+    100004: Bathroom_bottles
+    100006: Bathroom_door
+    100008: Bathroom_doorknob
+    100010: Bathroom_external_walls
+    100012: Bathroom_glassdoor
+    100014: Bathroom_glassdoor_handles
+    100016: Bathroom_glassdoor_track
+    100018: Bathroom_hanging_towel
+    100020: Bathroom_houseplant_large
+    100022: Bathroom_houseplant_small
+    100024: Bathroom_incense
+    100026: Bathroom_incense_holder
+    100028: Bathroom_mirror
+    100030: Bathroom_shower_head
+    100032: Bathroom_sink
+    100034: Bathroom_sink_cabinet
+    100036: Bathroom_sink_faucet
+    100038: Bathroom_sink_top
+    100040: Bathroom_soap
+    100042: Bathroom_soap_holder
+    100044: Bathroom_tiles
+    100046: Bathroom_toilet
+    100048: Bathroom_toilet_paper
+    100050: Bathroom_toilet_paper_holder
+    100052: Bathroom_towel_rack
+    100054: Bathroom_towel_roll_blue
+    100056: Bathroom_towel_roll_red
+    100058: Bathroom_towel_roll_yellow
+    100060: Bathroom_towel_shelf
+    100062: Bathroom_tub_faucet
+    400000: //RootNode
+    400002: Bathroom_bathtub
+    400004: Bathroom_bottles
+    400006: Bathroom_door
+    400008: Bathroom_doorknob
+    400010: Bathroom_external_walls
+    400012: Bathroom_glassdoor
+    400014: Bathroom_glassdoor_handles
+    400016: Bathroom_glassdoor_track
+    400018: Bathroom_hanging_towel
+    400020: Bathroom_houseplant_large
+    400022: Bathroom_houseplant_small
+    400024: Bathroom_incense
+    400026: Bathroom_incense_holder
+    400028: Bathroom_mirror
+    400030: Bathroom_shower_head
+    400032: Bathroom_sink
+    400034: Bathroom_sink_cabinet
+    400036: Bathroom_sink_faucet
+    400038: Bathroom_sink_top
+    400040: Bathroom_soap
+    400042: Bathroom_soap_holder
+    400044: Bathroom_tiles
+    400046: Bathroom_toilet
+    400048: Bathroom_toilet_paper
+    400050: Bathroom_toilet_paper_holder
+    400052: Bathroom_towel_rack
+    400054: Bathroom_towel_roll_blue
+    400056: Bathroom_towel_roll_red
+    400058: Bathroom_towel_roll_yellow
+    400060: Bathroom_towel_shelf
+    400062: Bathroom_tub_faucet
+    2300000: Bathroom_bathtub
+    2300002: Bathroom_bottles
+    2300004: Bathroom_door
+    2300006: Bathroom_doorknob
+    2300008: Bathroom_external_walls
+    2300010: Bathroom_glassdoor
+    2300012: Bathroom_glassdoor_handles
+    2300014: Bathroom_glassdoor_track
+    2300016: Bathroom_hanging_towel
+    2300018: Bathroom_houseplant_large
+    2300020: Bathroom_houseplant_small
+    2300022: Bathroom_incense
+    2300024: Bathroom_incense_holder
+    2300026: Bathroom_mirror
+    2300028: Bathroom_shower_head
+    2300030: Bathroom_sink
+    2300032: Bathroom_sink_cabinet
+    2300034: Bathroom_sink_faucet
+    2300036: Bathroom_sink_top
+    2300038: Bathroom_soap
+    2300040: Bathroom_soap_holder
+    2300042: Bathroom_tiles
+    2300044: Bathroom_toilet
+    2300046: Bathroom_toilet_paper
+    2300048: Bathroom_toilet_paper_holder
+    2300050: Bathroom_towel_rack
+    2300052: Bathroom_towel_roll_blue
+    2300054: Bathroom_towel_roll_red
+    2300056: Bathroom_towel_roll_yellow
+    2300058: Bathroom_towel_shelf
+    2300060: Bathroom_tub_faucet
+    3300000: Bathroom_bathtub
+    3300002: Bathroom_bottles
+    3300004: Bathroom_door
+    3300006: Bathroom_doorknob
+    3300008: Bathroom_external_walls
+    3300010: Bathroom_glassdoor
+    3300012: Bathroom_glassdoor_handles
+    3300014: Bathroom_glassdoor_track
+    3300016: Bathroom_hanging_towel
+    3300018: Bathroom_houseplant_large
+    3300020: Bathroom_houseplant_small
+    3300022: Bathroom_incense
+    3300024: Bathroom_incense_holder
+    3300026: Bathroom_mirror
+    3300028: Bathroom_shower_head
+    3300030: Bathroom_sink
+    3300032: Bathroom_sink_cabinet
+    3300034: Bathroom_sink_faucet
+    3300036: Bathroom_sink_top
+    3300038: Bathroom_soap
+    3300040: Bathroom_soap_holder
+    3300042: Bathroom_tiles
+    3300044: Bathroom_toilet
+    3300046: Bathroom_toilet_paper
+    3300048: Bathroom_toilet_paper_holder
+    3300050: Bathroom_towel_rack
+    3300052: Bathroom_towel_roll_blue
+    3300054: Bathroom_towel_roll_red
+    3300056: Bathroom_towel_roll_yellow
+    3300058: Bathroom_towel_shelf
+    3300060: Bathroom_tub_faucet
+    4300000: Bathroom_doorknob
+    4300002: Bathroom_glassdoor
+    4300004: Bathroom_bathtub
+    4300006: Bathroom_tub_faucet
+    4300008: Bathroom_toilet_paper
+    4300010: Bathroom_incense_holder
+    4300012: Bathroom_sink_faucet
+    4300014: Bathroom_sink_top
+    4300016: Bathroom_mirror
+    4300018: Bathroom_houseplant_large
+    4300020: Bathroom_soap
+    4300022: Bathroom_shower_head
+    4300024: Bathroom_towel_shelf
+    4300026: Bathroom_hanging_towel
+    4300028: Bathroom_toilet_paper_holder
+    4300030: Bathroom_towel_rack
+    4300032: Bathroom_incense
+    4300034: Bathroom_glassdoor_handles
+    4300036: Bathroom_soap_holder
+    4300038: Bathroom_towel_roll_blue
+    4300040: Bathroom_towel_roll_yellow
+    4300042: Bathroom_bottles
+    4300044: Bathroom_tiles
+    4300046: Bathroom_sink_cabinet
+    4300048: Bathroom_towel_roll_red
+    4300050: Bathroom_sink
+    4300052: Bathroom_toilet
+    4300054: Bathroom_glassdoor_track
+    4300056: Bathroom_houseplant_small
+    4300058: Bathroom_door
+    4300060: Bathroom_external_walls
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
