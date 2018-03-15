@@ -175,6 +175,7 @@ The steering committee consists of the following members (company name ordered):
 -   Ian Kelly, Google
 -   Eric Mauskopf, Google
 -   Damien Kelly, Google (YouTube)
+-   Jean-Marc Jot, Magic Leap
 -   Michael Berg, Unity Technologies
 
 Affiliations are listed for identification purposes only; steering committee
