@@ -1,4 +1,4 @@
-# [Resonance Audio](https://developers.google.com/resonance-audio) Source Code
+# [Resonance Audio](https://developers.google.com/resonance-audio) Source Code [![Travis CI](https://travis-ci.org/resonance-audio/resonance-audio.svg?branch=master)](https://travis-ci.org/resonance-audio/resonance-audio)
 
 This is the official open source project for the Resonance Audio SDK. This
 repository consists of the full source code of the Resonance Audio C++ library,
