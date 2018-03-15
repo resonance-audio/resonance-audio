@@ -2,13 +2,13 @@
 
 This is the official open source project for the Resonance Audio SDK. This
 repository consists of the full source code of the Resonance Audio C++ library,
- as well as the platform integrations into [Unity](https://unity3d.com/),
- [FMOD](https://www.fmod.com/),
+as well as the platform integrations into [Unity](https://unity3d.com/),
+[FMOD](https://www.fmod.com/),
 [Wwise](https://www.audiokinetic.com/products/wwise/) and DAW tools.
 
 Resonance Audio started as a Google product and has since graduated to open
-source. It is supported by members of our
-[steering committee](#steering-committee) who are also project committers.
+source. It is supported by members of our [steering
+committee](#steering-committee) who are also project committers.
 
 In this document there are some quick instructions for how to build the SDK from
 source code.
