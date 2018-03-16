@@ -26,8 +26,7 @@ limitations under the License.
 
 namespace vraudio {
 
-// Implements a spectral reverb producing a decorrelated stereo output. See:
-// https://goo.gl/hv1pdJ and https://goo.gl/M7XPvs for further details.
+// Implements a spectral reverb producing a decorrelated stereo output.
 class SpectralReverb {
  public:
   // Constructs a spectral reverb.
