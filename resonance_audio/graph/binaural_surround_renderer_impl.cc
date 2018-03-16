@@ -247,8 +247,7 @@ SourceId BinauralSurroundRendererImpl::CreateSoundObject(float azimuth_deg) {
 }
 
 void BinauralSurroundRendererImpl::InitializeRoomReverb() {
-  // The following settings has been applied based on AESTD1001.1.01-10. For
-  // more information, please see this doc: https://goo.gl/l4MT9g
+  // The following settings has been applied based on AESTD1001.1.01-10.
   RoomProperties room_properties;
   room_properties.dimensions[0] = 9.54f;
   room_properties.dimensions[1] = 6.0f;
