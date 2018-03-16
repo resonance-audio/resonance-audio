@@ -145,8 +145,7 @@ void ReflectionsProcessor::ApplyReflections(AudioBuffer* output) {
     if (!zero_gain) {
       gain_processors_[i].ApplyGain(gains_[i], *delay_channel, delay_channel,
                                     false /* accumulate_output */);
-      // Applies fast reflections encoding, as explained in:
-      // https://goo.gl/GE2QAF
+      // Applies fast Ambisonic reflections encoding.
       (*output)[0] += *delay_channel;
       switch (i) {
         case 0: /* left wall reflection */
