@@ -20,6 +20,9 @@ using System.Text;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEngine;
+#if UNITY_2018_1_OR_NEWER
+using UnityEditor.Build.Reporting;
+#endif  // UNITY_2018_1_OR_NEWER
 
 // Notify developer if conflicting Google VR audio libraries are present.
 class ResonanceAudioBuildProcessor : IPreprocessBuild {
@@ -47,6 +50,12 @@ class ResonanceAudioBuildProcessor : IPreprocessBuild {
   public int callbackOrder {
     get { return 0; }
   }
+
+#if UNITY_2018_1_OR_NEWER
+  public void OnPreprocessBuild(BuildReport report) {
+    OnPreprocessBuild(report.summary.platform, report.summary.outputPath);
+  }
+#endif  // UNITY_2018_1_OR_NEWER
 
   public void OnPreprocessBuild(BuildTarget target, string path) {
     // Find Google VR audio asset to delete.
