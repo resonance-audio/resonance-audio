@@ -84,7 +84,10 @@ inline int GetPeriphonicAmbisonicOrder(size_t num_components) {
 // part of a square root of the channel number. Please note, that in Ambisonics
 // the terms 'order' (usually denoted as 'n') and 'degree' (usually denoted as
 // 'm') are used in the opposite meaning as in more traditional maths or physics
-// conventions: https://goo.gl/jzt4Yy.
+// conventions:
+// [1] C. Nachbar, F. Zotter, E. Deleflie, A. Sontacchi, "AMBIX - A SUGGESTED
+//     AMBISONICS FORMAT", Proc. of the 2nd Ambisonics Symposium, June 2-3 2011,
+//     Lexington, KY, https://goo.gl/jzt4Yy.
 inline int GetPeriphonicAmbisonicOrderForChannel(size_t channel) {
   return static_cast<int>(sqrtf(static_cast<float>(channel)));
 }
@@ -92,7 +95,10 @@ inline int GetPeriphonicAmbisonicOrderForChannel(size_t channel) {
 // Calculates the degree of the current spherical harmonic channel. Please note,
 // that in Ambisonics the terms 'order' (usually denoted as 'n') and 'degree'
 // (usually denoted as 'm') are used in the opposite meaning as in more
-// traditional maths or physics conventions: https://goo.gl/jzt4Yy.
+// traditional maths or physics conventions:
+// [1] C. Nachbar, F. Zotter, E. Deleflie, A. Sontacchi, "AMBIX - A SUGGESTED
+//     AMBISONICS FORMAT", Proc. of the 2nd Ambisonics Symposium, June 2-3 2011,
+//     Lexington, KY, https://goo.gl/jzt4Yy.
 inline int GetPeriphonicAmbisonicDegreeForChannel(size_t channel) {
   const int order = GetPeriphonicAmbisonicOrderForChannel(channel);
   return static_cast<int>(channel) - order * (order + 1);

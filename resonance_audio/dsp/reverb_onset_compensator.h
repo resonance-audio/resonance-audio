@@ -78,7 +78,6 @@ class ReverbOnsetCompensator {
   std::vector<AudioBuffer> bandpassed_noise_right_;
 
   // The constituent curves used to generate the onset compensation envelopes.
-  // The methods producing these curves can be seen here: https://goo.gl/c7bf13.
   AudioBuffer base_curves_;
   AudioBuffer adder_curves_;
 

@@ -121,7 +121,9 @@ std::unique_ptr<AudioBuffer> GenerateDecorrelationFilters(int sampling_rate) {
   const int kMaxGroupDelaySamples = static_cast<int>(
       roundf(kMaxGroupDelaySeconds * static_cast<float>(sampling_rate)));
 
-  // Filter coefficients according to: https://goo.gl/zXlA2B.
+  // Filter coefficients according to:
+  // [1]  F. Zotter, M. Frank, "Efficient Phantom Source Widening", Archives of
+  //      Acoustics, Vol. 38, No. 1, pp. 27–37 (2013).
   const float g0 = 1.0f - 0.25f * IntegerPow(kPhaseModulationDepth, 2);
   const float g1 = 0.5f * kPhaseModulationDepth -
                    0.0625f * IntegerPow(kPhaseModulationDepth, 3);

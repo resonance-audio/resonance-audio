@@ -157,7 +157,7 @@ void ReverbOnsetCompensator::GenerateCorrectionCurves() {
             adder_curves_[1].begin());
 
   // Evaluate the polynomials to generate the base curves. Here the 'low' and
-  // 'high' names refer to the reverberation times. See: https://goo.gl/c7bf13.
+  // 'high' names refer to the reverberation times.
   AudioBuffer::Channel* low_channel = &base_curves_[0];
   AudioBuffer::Channel* high_channel = &base_curves_[1];
   for (size_t i = 0; i < kCorrectionCurveLength; ++i) {

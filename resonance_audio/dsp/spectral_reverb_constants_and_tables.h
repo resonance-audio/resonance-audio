@@ -48,12 +48,11 @@ const size_t kCompensationOnsetLength = 1024;
 const size_t kCorrectionCurveLength = 6144;
 
 // Index of the feedback factor and curve multipliers. below which the low
-// frequency correction curves must be used. This value was chosen based upon
-// the change in curve behaviour seen in the graph here: https://goo.gl/c7bf13.
+// frequency correction curves must be used.
 const size_t kCurveChangeoverIndex = 51;
 
 // Offset and scaling values for the compensation curve polynomials. Used to
-// ensure the polynomial fitting was well conditioned. https://goo.gl/c7bf13.
+// ensure the polynomial fitting was well conditioned.
 const float kCurveOffset = 3584.5f;
 const float kCurveScale = 0.00027897893709025f;
 
@@ -61,7 +60,7 @@ const float kCurveScale = 0.00027897893709025f;
 const size_t kCurvePolynomialLength = 5;
 
 // Coefficients of the curves making up the first part of the compensation
-// envelopes, split into low and high frequency part. https://goo.gl/c7bf13.
+// envelopes, split into low and high frequency part.
 const float kHighReverberationCorrectionCurve[kCurvePolynomialLength] = {
     0.207891278205479f, -0.32101050261694f, 0.124608132159297f,
     0.0119620847734548f, -0.0093840571415877f};
@@ -100,8 +99,7 @@ static inline int GetFeedbackIndexFromRt60(float reverberation_time,
 // Mapping between reverberation times at a given frequency and the
 // corresponding feedback value required in the specral reverb. This table
 // covers reverberation times between kMinReverbTimeForFeedback and
-// kNumFeedbackValues * kTimeStepSizeForFeedback, i.e. 0.15s and 25s @48kHz.The
-// methods producing this curve can be seen here: https://goo.gl/c7bf13.
+// kNumFeedbackValues * kTimeStepSizeForFeedback, i.e. 0.15s and 25s @48kHz.
 static const float kSpectralReverbFeedback[kNumFeedbackValues] = {
     0.231626448720861f, 0.231626448720861f, 0.271965742827169f,
     0.291599040391330f, 0.313450848869688f, 0.332864905289138f,
@@ -1565,8 +1563,7 @@ static const float kMagnitudeCompensation[kNumFeedbackValues] = {
 
 // Set of scalers, one per reverberation time, by which the
 // |kHighCorrectionCurve| and |kLowCorrectionCurve| curves are multiplied in
-// order to generate the correct onset compensation curves. Values were
-// calculated as outlined in the following doc: https://goo.gl/c7bf13.
+// order to generate the correct onset compensation curves.
 static const float kCurveCorrectionMultipliers[kNumFeedbackValues] = {
     0.000249027612622225f, 0.0475827382701585f, 0.0982856973675534f,
     0.144077780284872f,    0.187710331328442f,  0.229214552437128f,

@@ -108,6 +108,8 @@ The script provides the following flags:
 -   t=|--target=
     -   `RESONANCE_AUDIO_API`: Builds the Resonance Audio API
     -   `RESONANCE_AUDIO_TESTS`: Runs the Resonance Audio unit tests
+    -   `GEOMETRICAL_ACOUSTICS_TESTS`: Runs the geometrical acoustics specific
+        unit tests.
     -   `UNITY_PLUGIN`: Builds the Resonance Audio plugin for Unity
     -   `WWISE_AUTHORING_PLUGIN`: Builds the Resonance Audio authoring plugin
         for Wwise
