@@ -171,11 +171,12 @@ The steering committee consists of the following members (company name ordered):
 -   Martin Dufour, Audiokinetic
 -   Aaron McLeran, Epic Games
 -   Mathew Block, Firelight Technologies
--   Marcin Gorzel, Google
 -   Alper Gungormusler, Google
--   Julius Kammerl, Google
--   Ian Kelly, Google
 -   Eric Mauskopf, Google
+-   Haroon Qureshi, Google
+-   Ian Kelly, Google
+-   Julius Kammerl, Google
+-   Marcin Gorzel, Google
 -   Damien Kelly, Google (YouTube)
 -   Jean-Marc Jot, Magic Leap
 -   Michael Berg, Unity Technologies
