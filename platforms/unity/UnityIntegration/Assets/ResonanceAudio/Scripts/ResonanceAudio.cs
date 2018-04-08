@@ -401,8 +401,10 @@ public static class ResonanceAudio {
   // Occlusion layer mask.
   private static int occlusionMaskValue = -1;
 
+#if UNITY_EDITOR
   // Pre-allocated position array for proxy room computation.
   private static float[] roomPosition = new float[3];
+#endif  // UNITY_EDITOR
 
   // Pre-allocated room properties instance for room effects computation.
   private static RoomProperties roomProperties = new RoomProperties();
