@@ -4,7 +4,6 @@ EXPORTS
   SetListenerGain
   SetListenerStereoSpeakerMode
   SetRoomProperties
-  SetRt60ValuesAndProxyRoomProperties
   StartSoundfieldRecorder
   StopSoundfieldRecorderAndWriteToFile
   InitializeReverbComputer
