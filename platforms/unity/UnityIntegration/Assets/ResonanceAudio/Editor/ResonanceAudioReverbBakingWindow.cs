@@ -76,9 +76,9 @@ public class ResonanceAudioReverbBakingWindow : EditorWindow {
   // The foldout of the reverb probe selection.
   private bool showReverbProbeSelection = true;
 
-  // The path to the material mapper asset.
-  private const string materialMapperAssetPath =
-      "Assets/ResonanceAudio/Resources/ResonanceAudioMaterialMapper.asset";
+  // The relative path to the material mapper asset.
+  private const string materialMapperRelativeAssetPath = 
+      "ResonanceAudio/Resources/ResonanceAudioMaterialMapper.asset";
 
   [MenuItem("ResonanceAudio/Reverb Baking")]
   private static void Initialize() {
@@ -171,11 +171,15 @@ public class ResonanceAudioReverbBakingWindow : EditorWindow {
 
   // Loads the material mapper asset; creates one if not found.
   private void LoadOrCreateMaterialMapper() {
+    var scriptPath = AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(this));
+    var rootFolder = scriptPath.Substring(0, scriptPath.LastIndexOf("ResonanceAudio/"));
+    var materialMapperAssetPath = rootFolder + materialMapperRelativeAssetPath;
     materialMapper = AssetDatabase.LoadAssetAtPath<ResonanceAudioMaterialMapper>(
         materialMapperAssetPath);
     if (materialMapper == null) {
       materialMapper = ScriptableObject.CreateInstance<ResonanceAudioMaterialMapper>();
       AssetDatabase.CreateAsset(materialMapper, materialMapperAssetPath);
+      AssetDatabase.Refresh();
       AssetDatabase.SaveAssets();
     }
 
