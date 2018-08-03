@@ -29,6 +29,7 @@ EMBREE_CONFIG+=(-DEMBREE_STATIC_LIB=ON)
 EMBREE_CONFIG+=(-DEMBREE_TUTORIALS=OFF)
 EMBREE_CONFIG+=(-DEMBREE_TASKING_SYSTEM=OFF)
 EMBREE_CONFIG+=(-DEMBREE_BACKFACE_CULLING=ON)
+EMBREE_CONFIG+=(-DEMBREE_MAX_ISA=SSE2)
 
 declare -a BUILD_FLAGS
 declare -a CONFIG_FLAGS
@@ -40,7 +41,7 @@ git_clone_if_not_exist () {
   PATCH=$4
   if [[ ! -d "${TARGET_PATH}" ]] ; then
     git clone -b "${BRANCH}" "${URL}" "${TARGET_PATH}"
-    cd "$TARGET_PATH" && patch -p1 < ../patches/"${PATCH}" && cd ..
+    cd "$TARGET_PATH" && git checkout "${BRANCH}" && patch -p1 < ../patches/"${PATCH}" && cd ..
   fi
 }
 
