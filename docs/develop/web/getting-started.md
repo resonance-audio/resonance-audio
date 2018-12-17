@@ -5,7 +5,7 @@ weight: 170
 ---
 # Getting Started with the Resonance Audio SDK for Web
 
-<img srcset="/images/web/web_hero_image.png 2x">
+<img srcset="{{ site.baseurl }}/images/web/web_hero_image.png 2x">
 
 Get started using the Resonance Audio SDK for Web.
 
@@ -137,7 +137,7 @@ audio reflections and reverberation for your scene.
 
 ## Next Steps
 
-*  See the [Resonance Audio Developer Guide](/develop/web/developer-guide) for
+*  See the [Resonance Audio Developer Guide]({{ site.baseurl }}/develop/web/developer-guide) for
    details on migrating existing web projects to Resonance Audio or working with the Resonance Audio SDK.
 
 *  Try out more Resonance Audio demos:

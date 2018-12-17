@@ -8,7 +8,7 @@ FMOD Studio yet, you can **get the latest Resonance Audio FMOD plugin
 binaries** directly from GitHub.
 
 If you are new to the Resonance Audio plugin for FMOD,
-see [Get Started with the Resonance Audio Plugin for FMOD](/develop/fmod/getting-started).
+see [Get Started with the Resonance Audio Plugin for FMOD]({{ site.baseurl }}/develop/fmod/getting-started).
 
 ## Use the binaries in FMOD Studio
 
@@ -41,7 +41,7 @@ To use the latest version of the plugin in FMOD Studio:
 
 This guide assumes that you have already imported the newest FMOD Studio integration
 into either Unity or Unreal Engine. If not, see
-[Game Engine Integration](/develop/fmod/game-engine-integration)
+[Game Engine Integration]({{ site.baseurl }}/develop/fmod/game-engine-integration)
 for instructions.
 
 1.  After importing the FMOD Studio integration into your game engine, copy all of

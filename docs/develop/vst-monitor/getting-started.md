@@ -4,7 +4,7 @@ weight: 160
 ---
 # Getting started with the Resonance Audio Monitor VST Plugin
 
-<img src="/images/vst/vst_updated_hero.png">
+<img src="{{ site.baseurl }}/images/vst/vst_updated_hero.png">
 
 Use the Resonance Audio Monitor VST plugin to preview Ambisonic soundfield
 assets that your users will hear in your YouTube 360 videos, VR, AR, or
@@ -29,7 +29,7 @@ You'll need a DAW that:<br>
 *  Can render four-channel audio files
 *  [Hosts VST plugins](//en.wikipedia.org/wiki/Virtual_Studio_Technology#VST_hosts){: .external}
 
-    <img src="/images/vst/VST3_Logo.png"><br>
+    <img src="{{ site.baseurl }}/images/vst/VST3_Logo.png"><br>
     VST PlugIn Technology by Steinberg Media Technologies
 
 ### Audio asset requirements
@@ -67,7 +67,7 @@ details might vary from those described here.
 ### Configure binaural stereo monitoring track to preview Ambisonic tracks
 
 With the Resonance Audio Monitor VST plugin, Ambisonic audio sent to your
-monitor is decoded and rendered using [Head Related Transfer Functions (HRTFs)](/discover/concepts#simulating-sound-waves-interacting-with-human-ears).
+monitor is decoded and rendered using [Head Related Transfer Functions (HRTFs)]({{ site.baseurl }}/discover/concepts#simulating-sound-waves-interacting-with-human-ears).
 
 1.  Open REAPER and select **File** > **New project**.
 
@@ -75,7 +75,7 @@ monitor is decoded and rendered using [Head Related Transfer Functions (HRTFs)](
 
 1.  Add the **ResonanceAudioMonitor** VST plugin to your monitoring FX:
 
-    <img src="/images/vst/resonance_audio_monitor_fx.png">
+    <img src="{{ site.baseurl }}/images/vst/resonance_audio_monitor_fx.png">
 
 1.  If you are using other plugins, make sure that the
     Resonance Audio Monitor VST is the last plugin on the monitor track.
@@ -98,14 +98,14 @@ the MASTER bus routing needs to be set to 4 channels:
 
 1.  In **Hardware**, set output to **Multichannel source** > **4 channels** > **1-4**.
 
-    <img src="/images/vst/master_bus_settings.png">
+    <img src="{{ site.baseurl }}/images/vst/master_bus_settings.png">
 
 1.  Press **Play**. You should hear your Ambisonic audio rendered using HRTFs.
 
 ### (Optional) Add head rotation
 You can opt to include head rotation support on your monitor track. This allows
 Resonance Audio to [maintain sound source locations around the user in response
-to their head movements](/discover/concepts#simulating-sound-wave-interactions-with-their-environment).
+to their head movements]({{ site.baseurl }}/discover/concepts#simulating-sound-wave-interactions-with-their-environment).
 
 1.  Download the [ambiX Ambisonic plugin suite](http://www.matthiaskronlachner.com/?p=2015){: .external}.
 
@@ -122,7 +122,7 @@ to their head movements](/discover/concepts#simulating-sound-wave-interactions-w
     positioned **before** the **ResonanceAudioMonitor** plugin on the monitor
     track.
 
-    <img src="/images/vst/resonance_audio_monitor_rotator_fx.png">
+    <img src="{{ site.baseurl }}/images/vst/resonance_audio_monitor_rotator_fx.png">
 
 
 ## Next steps

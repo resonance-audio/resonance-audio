@@ -3,7 +3,7 @@ title: Get started with Resonance Audio for FMOD
 weight: 120
 ---
 
-<img src="/images/fmod/fmod_hero.png">
+<img src="{{ site.baseurl }}/images/fmod/fmod_hero.png">
 
 Get started using Resonance Audio plugins for FMOD. This guide shows you how
 to add and configure the plugins in your FMOD Studio projects.
@@ -128,7 +128,7 @@ to your project, you can add a Resonance Audio Source to an event.
 1.   Right-click in the **Events** pane to create a new event.
 1.   Select the event's master track and delete the FMOD default spatializer
      from the master track deck.
-     <img src=/resonance-audio/images/fmod/fmod-setup-remove.png>
+     <img src="{{ site.baseurl }}/images/fmod/fmod-setup-remove.png">
 1.   Right-click in the master track deck.<br>
 1.   Select **Add Effect** > **Plug-in Effects** > **Google** >
      **Resonance Audio Source** to place the plugin on the master track deck.
@@ -244,7 +244,7 @@ The Resonance Audio Source plugin has the following features.
   </tr>
 </table>
 
-<img src="/images/fmod/fmod-source-features.png">
+<img src="{{ site.baseurl }}/images/fmod/fmod-source-features.png">
 
 
 ### Where to place the Resonance Audio Source
@@ -289,7 +289,7 @@ tracks within the same event.
   **Plug-in Effects** > **Google** > **Resonance Audio Soundfield** to place
   the plugin on the audio event deck.
 
-<img src="/images/fmod/AmbisonicMaster.png">
+<img src="{{ site.baseurl }}/images/fmod/AmbisonicMaster.png">
 
 
 #### Option 2: Place the plugin and audio file on the same audio track
@@ -301,7 +301,7 @@ track as the audio file and not on the event master track.
   **Plug-in Effects** > **Google** > **Resonance Audio Soundfield** to place
   the plugin on the audio track deck.
 
-<img src="/images/fmod/Ambisonic4ch.png">
+<img src="{{ site.baseurl }}/images/fmod/Ambisonic4ch.png">
 
 
 

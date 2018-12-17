@@ -4,7 +4,7 @@ weight: 100
 ---
 
 
-<img srcset="/images/hero_images/RA_Develop.png 2x">
+<img srcset="{{ site.baseurl }}/images/hero_images/RA_Develop.png 2x">
 
 Get started developing with Resonance Audio.
 
@@ -62,6 +62,6 @@ Select a platform at left to get started with:
 *  Developer guidance for fine-tuning configurations
 *  Game engine integration for plugins
 
-You can also get [design tips](/develop/design-tips) on
+You can also get [design tips]({{ site.baseurl }}/develop/design-tips) on
 making the most impact with Resonance Audio.
 

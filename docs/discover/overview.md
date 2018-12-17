@@ -3,15 +3,15 @@ title: Discover Resonance Audio
 weight: 1
 ---
 
-<img srcset="/images/hero_images/RA_Discover.png 2x">
+<img srcset="{{ site.baseurl }}/images/hero_images/RA_Discover.png 2x">
 
 Resonance Audio is a multi-platform spatial audio SDK, delivering high fidelity
 at scale. This powerful spatial audio technology is critical to realistic
 experiences for AR, VR, gaming, and video.
 
 ## How does Resonance Audio work?
-Resonance Audio [simulates how sound waves interact with human ears](/discover/concepts#simulating-sound-waves-interacting-with-human-ears)
-and their [environment](/discover/concepts#simulating-sound-waves-interacting-with-their-environment).
+Resonance Audio [simulates how sound waves interact with human ears]({{ site.baseurl }}/discover/concepts#simulating-sound-waves-interacting-with-human-ears)
+and their [environment]({{ site.baseurl }}/discover/concepts#simulating-sound-waves-interacting-with-their-environment).
 
 ## Supported platforms
 You can use Resonance Audio in a variety of gaming, audio, and app development
@@ -56,6 +56,6 @@ project on GitHub](//github.com/googlevr/audio_factory).
 ## Learn more
 To get started working with Resonance Audio, see:
 
-*  [Fundamental concepts](/discover/concepts)
+*  [Fundamental concepts]({{ site.baseurl }}/discover/concepts)
 
 *  [Developer overview](/develop/overview)

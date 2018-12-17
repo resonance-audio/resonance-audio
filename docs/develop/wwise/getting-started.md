@@ -4,7 +4,7 @@ weight: 180
 ---
 # Getting started with the Resonance Audio plugin for Wwise
 
-<img srcset="/images/wwise/wwise_hero2.png 2x">
+<img srcset="{{ site.baseurl }}/images/wwise/wwise_hero2.png 2x">
 
 Get started using the Resonance Audio plugin for Wwise.
 
@@ -72,11 +72,11 @@ The package has the following plugins.
      order produces higher fidelity output. For example, use **Ambisonics-3-3**
      (Third-order Ambisonics) for the highest fidelity.
 
-     <img srcset="/images/wwise/01-renderer.png 2x">
+     <img srcset="{{ site.baseurl }}/images/wwise/01-renderer.png 2x">
 
 1.   Add the **Resonance Audio Renderer** as an effect to the Ambisonic **Audio Bus**.
 
-     <img srcset="/images/wwise/02-renderer.png 2x">
+     <img srcset="{{ site.baseurl }}/images/wwise/02-renderer.png 2x">
 
 1.   Import an audio file to the project.
 
@@ -86,12 +86,12 @@ The package has the following plugins.
      You can also opt to try different source
      positions by setting **Position Source** to **User-defined**.
 
-     <img srcset="/images/wwise/03-renderer.png 2x">
+     <img srcset="{{ site.baseurl }}/images/wwise/03-renderer.png 2x">
 
 1.   Configure the sound source **Output Bus** to route it to the **Audio
      Bus**.
 
-     <img srcset="/images/wwise/04-renderer.png 2x">
+     <img srcset="{{ site.baseurl }}/images/wwise/04-renderer.png 2x">
 
 1.   Make sure to wear headphones and press **Play**.
      You should hear the sound binaurally rendered according to the sound
@@ -106,33 +106,33 @@ The package has the following plugins.
 1.   Create a new **Audio Bus** under the master audio bus and set its channel
      configuration to **Stereo**.
 
-     <img src="/images/wwise/05-room.png" width="200">
+     <img src="{{ site.baseurl }}/images/wwise/05-room.png" width="200">
 
 1.   Add **Resonance Audio Room Effects** as a mixer plugin to the **Room Effects Bus**.
 
-     <img srcset="/images/wwise/06-room.png 2x">
+     <img srcset="{{ site.baseurl }}/images/wwise/06-room.png 2x">
 
      The **Master Bus** hierarchy should now have the corresponding buses for
      the plugins.
 
-     <img srcset="/images/wwise/07-room.png 2x">
+     <img srcset="{{ site.baseurl }}/images/wwise/07-room.png 2x">
 
  1.   Add an **Auxiliary Bus** under the **Audio Bus** to access the direct
       sound of each source alongside the room effects mix using the Auxiliary
       Sends.
 
-      <img src="/images/wwise/08-room.png" width="200">
+      <img src="{{ site.baseurl }}/images/wwise/08-room.png" width="200">
 
 
 1.   Select your 3D sound and route its output to the **Room Effects Bus**.
      Add the Ambisonic auxiliary mix bus as one of the **Auxiliary Sends**.
 
-      <img srcset="/images/wwise/09-room.png 2x">
+      <img srcset="{{ site.baseurl }}/images/wwise/09-room.png 2x">
 
 1.   Switch to the **Mixer plug-in** tab to make sure that routing has been set
      up correctly. You should be able to see the Room Effects plugin UI here.
 
-      <img srcset="/images/wwise/10-room.png 2x">
+      <img srcset="{{ site.baseurl }}/images/wwise/10-room.png 2x">
 
 
 Note: If room properties are not configured, the room effects bus outputs silence.<br><br>
@@ -166,7 +166,7 @@ As an example, you can create an **Ambisonic_FOA_Mix** auxiliary bus with an
 This bus renders the routed sounds in First-order Ambisonics (FOA)
 regardless of the binaural renderer order in the main audio bus.
 
-<img src="/images/wwise/11-room.png" width="200">
+<img src="{{ site.baseurl }}/images/wwise/11-room.png" width="200">
 
 ## Next Steps
 *  See [Game Engine Integration](game-engine-integration)

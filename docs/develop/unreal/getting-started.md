@@ -3,7 +3,7 @@ title: Get Started with Resonance Audio for Unreal
 weight: 150
 ---
 
-<img src="/images/unreal/unreal-hero-image.png">
+<img src="{{ site.baseurl }}/images/unreal/unreal-hero-image.png">
 
 This guide shows you how to set up your development environment and create a
 spatialized sound effect with the Resonance Audio plugin for Unreal.
@@ -95,7 +95,7 @@ for more details.
 1.  Locate the `Blueprint_Effect_Fire` blueprint.
 
 1.  Drag and drop the blueprint into your level.
-    <img src="/images/unreal/unreal_drag_drop_blueprint.png">
+    <img src="{{ site.baseurl }}/images/unreal/unreal_drag_drop_blueprint.png">
 
 Note: You can also create an empty sound source. To do this, create a new
 'Ambient Sound' by dragging and dropping it into the editor window.
@@ -105,7 +105,7 @@ Note: You can also create an empty sound source. To do this, create a new
 1.  Click **Play** to preview the game.
 
     You should see something like this and hear a fire sound effect.
-    <img src="/images/unreal/unreal_fire_sound_effect.png">
+    <img src="{{ site.baseurl }}/images/unreal/unreal_fire_sound_effect.png">
 
     The sound effect is rendered using standard UE4 stereo panning. In the next
     section, we'll add HRTF spatialization to the sound effect.
@@ -131,7 +131,7 @@ Note: You can also create an empty sound source. To do this, create a new
 
 1.  In the **Spatialization Method** drop-down list, change **Panning** to **Binaural**.
 
-    <img src="/images/unreal/unreal_attenuation_settings_window.png">
+    <img src="{{ site.baseurl }}/images/unreal/unreal_attenuation_settings_window.png">
 
 ### Create new spatialization plugin settings
 
@@ -147,17 +147,17 @@ Note: You can also create an empty sound source. To do this, create a new
 
 1.  Provide a name for the new settings. For example, `FireSoundSpatializationSettings`.
 
-    <img src="/images/unreal/unreal_attenuation_plugin_settings_window.png">
+    <img src="{{ site.baseurl }}/images/unreal/unreal_attenuation_plugin_settings_window.png">
 
 1.  You should now see a new icon in the **Content**
     section.
 
 1.  Double-click the new icon to open `FireSoundSpatializationSettings`.
 
-    <img src="/images/unreal/resonance_audio_spatialization_settings.png">
+    <img src="{{ site.baseurl }}/images/unreal/resonance_audio_spatialization_settings.png">
 
     This menu lets you configure spatialization settings for sound sources.
-    You can also [control certain parameters in real time](/develop/unreal/developer-guide).
+    You can also [control certain parameters in real time]({{ site.baseurl }}/develop/unreal/developer-guide).
     For purposes of this tutorial, you can use the default settings.
 
     Note: The same spatialization settings apply to all sound sources that share
@@ -211,7 +211,7 @@ mark the asset as `Ambisonic` and will **not** route it to the Resonance Audio
 Ambisonic binaural decoder.
 
 ## Next steps
-See the [Resonance Audio plugin for Unreal Developer Guide](/develop/unreal/developer-guide)
+See the [Resonance Audio plugin for Unreal Developer Guide]({{ site.baseurl }}/develop/unreal/developer-guide)
 to learn about advanced configurations for:
 
    *  Spatialization parameters

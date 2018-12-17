@@ -28,7 +28,7 @@ a virtual world.
 The time difference between sound wave arrival at our left and
 right ears helps us determine the horizontal location of low-frequency sounds.
 
-<img src="/images/concepts/soundwave-to-ears3.gif">
+<img src="{{ site.baseurl }}/images/concepts/soundwave-to-ears3.gif">
 
 This **interaural time difference** (ITD) depends on a sound source's
 horizontal position relative to you. The farther that a source is to the left
@@ -51,7 +51,7 @@ Sounds coming from different directions bounce off of the
 inside of our outer ears in different ways.
 
 
-<img src="/images/concepts/sound-hits-ears.png" width="400px">
+<img src="{{ site.baseurl }}/images/concepts/sound-hits-ears.png" width="400px">
 Image: Sebastian Kaulitzki/Getty
 
 Humans use these changes in frequency, or **spectral effects**,
@@ -79,7 +79,7 @@ Moving our heads helps us to perceive relative changes in audio location.
 Resonance Audio responds to these head movements, maintaining a source's location
 in the sphere of sound.
 
-<img src="/images/concepts/spatial-rotate.gif">
+<img src="{{ site.baseurl }}/images/concepts/spatial-rotate.gif">
 
 Head-mounted displays track user head movements. Resonance Audio uses this
 information to rotate the sphere of sound in the opposite direction of the user's
@@ -101,14 +101,14 @@ directly from the source to us.
 As a sound source's distance from us increases, its energy decreases. This is
 why sounds farther away from us have a lower volume than sounds closer to us.
 
-<img src="/images/concepts/distance-from-speaker.png">
+<img src="{{ site.baseurl }}/images/concepts/distance-from-speaker.png">
 
 **Early reflections**<br>
 The first few reflected waves that arrive at our ears are known as **early
 reflections**. These reflections give us an impression of the size and shape of
 the room in which we are located.
 
-<img src="/images/concepts/reflections.png">
+<img src="{{ site.baseurl }}/images/concepts/reflections.png">
 
 Resonance Audio spatializes early reflections in real time and renders simulated
 sources for each reflection.
@@ -133,7 +133,7 @@ Resonance Audio simulates these environmental **occlusion** effects by treating
 high and low frequency components differently. High frequencies are blocked
 more than low frequencies, mimicking what happens in the real world.
 
-<img src="/images/concepts/sound-occluded.png">
+<img src="{{ site.baseurl }}/images/concepts/sound-occluded.png">
 
 #### Directivity
 A sound source's **directivity pattern** is related closely to occlusion.
@@ -149,7 +149,7 @@ are located.
 When you are behind the guitar, the guitar and player's body occlude the sound
 coming from the strings.
 
-<img src="/images/concepts/directivity2.gif">
+<img src="{{ site.baseurl }}/images/concepts/directivity2.gif">
 
 You can use Resonance Audio to change the directivity pattern for a source and
 mimic the natural, non-uniform, ways in which real sources emit sound.
@@ -164,7 +164,7 @@ There are two directivity parameters that you can configure:
 
 Resonance Audio uses a technology called [Ambisonics](//en.wikipedia.org/wiki/Ambisonics){: .external}
 to envelop the user in a sphere of sound.
-<img src="/images/concepts/speakers-surround-head-3d.png">
+<img src="{{ site.baseurl }}/images/concepts/speakers-surround-head-3d.png">
 
 As Ambisonic order increases, sound wave simulation becomes more accurate.
 
@@ -174,9 +174,9 @@ As Ambisonic order increases, sound wave simulation becomes more accurate.
 **Get started**
 
 *  See the developer overview to [learn about developer advantages and start using Resonance Audio in
-   your platform of choice](/develop/overview).
+   your platform of choice]({{ site.baseurl }}/develop/overview).
 
-*  Get [Design tips](/develop/design-tips) for achieving the
+*  Get [Design tips]({{ site.baseurl }}/develop/design-tips) for achieving the
    most impact with Resonance Audio.
 
 **Learn more about Google's spatial audio technology**

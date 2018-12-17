@@ -4,7 +4,7 @@ weight: 130
 
 ---
 
-<img src="/images/ios/ios_hero_image.png">
+<img src="{{ site.baseurl }}/images/ios/ios_hero_image.png">
 
 Get started with Resonance Audio SDK for iOS. This guide shows you how to:
 
@@ -46,7 +46,7 @@ Software requirements:
     (`Samples/TreasureHunt/TreasureHunt.xcworkspace`),
     and click **Run**.
 
-    <img src="/images/ios/xcode_2.png">
+    <img src="{{ site.baseurl }}/images/ios/xcode_2.png">
 
 
 ## Try out the app
@@ -55,9 +55,9 @@ In the Treasure Hunt sample app, you look for and collect cubes in 3D space.
 Make sure to wear headphones to experience the game's spatial audio.
 
 1.  Move your head in any direction until you see a cube.
-    <img src="/images/ios/green_cubes.png">
+    <img src="{{ site.baseurl }}/images/ios/green_cubes.png">
 2.  Look directly at the cube. This causes it to turn orange.
-    <img src="/images/ios/orange_cubes.png">
+    <img src="{{ site.baseurl }}/images/ios/orange_cubes.png">
 3.  Press the Cardboard viewer button to collect the cube.
 
 
@@ -266,6 +266,6 @@ you can specify different [materials](//developers.google.com/vr/android/referen
 ### Next Steps
 *  See the [API Reference](//developers.google.com/vr/ios/reference/interface_g_v_r_audio_engine) for more details.
 
-*  Get [design tips for working with Resonance Audio](/develop/design-tips).
+*  Get [design tips for working with Resonance Audio]({{ site.baseurl }}/develop/design-tips).
 
 

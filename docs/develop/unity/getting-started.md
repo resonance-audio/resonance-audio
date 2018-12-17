@@ -4,7 +4,7 @@ weight: 140
 
 ---
 
-<img srcset="/images/unity/unity_hero_dark.png 2x">
+<img srcset="{{ site.baseurl }}/images/unity/unity_hero_dark.png 2x">
 
 Get started using Resonance Audio in Unity. This guide shows you how to:
 
@@ -141,7 +141,7 @@ finer modeling of spaces and more nuanced reverb effects.</li>
   </table>
 
 Learn more about adding these components to your projects in the
-[Developer Guide for Resonance Audio for Unity](/develop/unity/developer-guide).
+[Developer Guide for Resonance Audio for Unity]({{ site.baseurl }}/develop/unity/developer-guide).
 
 
 
@@ -182,7 +182,7 @@ Resonance Audio components, and then copying component properties accordingly.
 
 1.  Remove the `GvrAudioListener` component from the game object.
 
-1.  For additional details, review [Add an audio listener to your scene](/develop/unity/developer-guide#add-an-audio-listener-to-your-scene) in the Developer Guide for Resonance Audio for Unity for more details.
+1.  For additional details, review [Add an audio listener to your scene]({{ site.baseurl }}/develop/unity/developer-guide#add-an-audio-listener-to-your-scene) in the Developer Guide for Resonance Audio for Unity for more details.
 
 ### `GvrAudioSource`
 
@@ -205,7 +205,7 @@ Resonance Audio components, and then copying component properties accordingly.
 
 1.  Remove the `GvrAudioSource` component from the game object.
 
-1.  For additional details, review [Add a sound source to your scene](/develop/unity/developer-guide#add-a-sound-source-to-your-scene)
+1.  For additional details, review [Add a sound source to your scene]({{ site.baseurl }}/develop/unity/developer-guide#add-a-sound-source-to-your-scene)
     in the Developer Guide for Resonance Audio for Unity.
 
 ### `GvrAudioSoundfield`
@@ -226,7 +226,7 @@ it is no longer necessary to provide separate stereo tracks as audio clips.
 
 1.  Remove the `GvrAudioSoundfield` component from the game object.
 
-1.  For additional details, review [Add an Ambisonic soundfield to your scene](/develop/unity/developer-guide#add-an-ambisonic-soundfield-to-your-scene) in the Developer Guide for
+1.  For additional details, review [Add an Ambisonic soundfield to your scene]({{ site.baseurl }}/develop/unity/developer-guide#add-an-ambisonic-soundfield-to-your-scene) in the Developer Guide for
     Resonance Audio for Unity.
 
 
@@ -240,7 +240,7 @@ it is no longer necessary to provide separate stereo tracks as audio clips.
 
 1.  Remove the `GvrAudioRoom` component from the game object.
 
-1.  For additional details, review [Add an audio room to your scene](/develop/unity/developer-guide#add-an-audio-room-to-your-scene)
+1.  For additional details, review [Add an audio room to your scene]({{ site.baseurl }}/develop/unity/developer-guide#add-an-audio-room-to-your-scene)
     in the Developer Guide for Resonance Audio for Unity.
 
 
@@ -312,13 +312,13 @@ it is no longer necessary to provide separate stereo tracks as audio clips.
 
 ## Next steps
 
-*  See the [Resonance Audio for Unity Developer Guide](/develop/unity/developer-guide) to
+*  See the [Resonance Audio for Unity Developer Guide]({{ site.baseurl }}/develop/unity/developer-guide) to
    learn about using Resonance Audio Room Effects and Reverb Probes for realistic
    environmental audio.
 
-*  Get [design tips for working with Resonance Audio](/develop/design-tips).
+*  Get [design tips for working with Resonance Audio]({{ site.baseurl }}/develop/design-tips).
 
-*  See the [Resonance Audio SDK for Unity API Reference](/reference/unity) for complete details
+*  See the [Resonance Audio SDK for Unity API Reference]({{ site.baseurl }}/reference/unity) for complete details
    on components and scripts in the SDK.
 
 

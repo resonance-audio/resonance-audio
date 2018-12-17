@@ -24,7 +24,7 @@ For example, if you attach a sound source to a bird, the user hears
 the sound of the bird's wings or call changing naturally as it flies closer
 or father away.
 
-<img src="/images/concepts/unity-add-bird-sound.png">
+<img src="{{ site.baseurl }}/images/concepts/unity-add-bird-sound.png">
 
 You can distribute sound sources throughout an environment to create
 a general ambience.
@@ -44,7 +44,7 @@ is always rendered at the listener's location.
 As Ambisonic files respond only to head rotation, soundfields
 work best to represent sounds in the distance.
 
-<img src="/images/concepts/unity-atmosphere.png">
+<img src="{{ site.baseurl }}/images/concepts/unity-atmosphere.png">
 
 ## Audio Room
 
@@ -63,7 +63,7 @@ inside a room. For realistic outdoor scenes, an audio room can feel less
 natural. This is because outdoors, the ground might be your scene's only
 reflective surface.
 
-<img src="/images/concepts/unity-use-room-model.png">
+<img src="{{ site.baseurl }}/images/concepts/unity-use-room-model.png">
 
 ## Sound design tips
 
@@ -73,7 +73,7 @@ If you want the user to notice a sound outside of their view, you can
 animate the position of the sound. This helps the user to locate the sound more
 quickly.
 
-<img src="/images/concepts/animate-sound.png">
+<img src="{{ site.baseurl }}/images/concepts/animate-sound.png">
 
 ### Repeat a sound
 
@@ -86,7 +86,7 @@ it.
 You can achieve the same effect by using sounds that comprise many distinct
 elements.
 
-<img src="/images/concepts/soundwaves.png">
+<img src="{{ site.baseurl }}/images/concepts/soundwaves.png">
 
 ### Use complex sounds
 Craft sounds that have:
@@ -106,7 +106,7 @@ With [digital audio workstation](//en.wikipedia.org/wiki/Digital_audio_workstati
 1.  Using monophonic files, place sounds on a virtual sphere around the user.
     You can move the sounds around and add effects to them.
 
-    <img src="/images/concepts/ambix-encoder.png">
+    <img src="{{ site.baseurl }}/images/concepts/ambix-encoder.png">
 
 2.  Use an Ambisonic microphone like the SoundField ST450, TetraMic, or Zoom H2n
     to capture the sound of an environment in 3D. You can load the captured
