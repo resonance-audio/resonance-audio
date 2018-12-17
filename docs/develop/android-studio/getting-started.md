@@ -3,7 +3,7 @@ title: Getting started with Resonance Audio for Android Studio
 weight: 110
 ---
 
-<img srcset="/images/android/android_hero_image.png 2x">
+<img srcset="{{ site.baseurl }}/images/android/android_hero_image.png 2x">
 
 Get started adding Resonance Audio to your Daydream and Cardboard apps
 in Android Studio.
@@ -48,7 +48,7 @@ Software requirements:
     **gvr-android-sdk** > **samples**.
 
      <figure>
-       <img src="/images/android-treasure-hunt-sample.png"
+       <img src="{{ site.baseurl }}/images/android-treasure-hunt-sample.png"
           width="400">
      </figure>
 
@@ -241,5 +241,5 @@ rules to your module level *build.gradle* file:
    for complete details on Resonance Audio capabilities that you can use in your
    own projects.
 
-*  Get [design tips for working with Resonance Audio](/develop/design-tips).
+*  Get [design tips for working with Resonance Audio]({{ site.baseurl }}/develop/design-tips).
 
