@@ -4,7 +4,7 @@ exclude_from_menu: true
 <div class="devsite-collapsible-section">
 <div class="resonance-audio-hero-wrapper">
 <div class="resonance-audio-hero-background">
-<img class="resonance-audio-hero-image" src="/images/RA_Home_Final.png">
+<img class="resonance-audio-hero-image" src="images/RA_Home_Final.png">
 </div>
 <div class="resonance-audio-hero-content-wrapper resonance-audio-container">
 <div class="resonance-audio-hero">
