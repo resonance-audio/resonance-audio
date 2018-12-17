@@ -8,7 +8,7 @@ This guide shows you how to integrate the Resonance Audio plugin for FMOD into
 Unity or Unreal projects.
 
 If you are new to the Resonance Audio plugin for FMOD,
-see [Get Started with the Resonance Audio Plugin for FMOD]({{ site.pageurl }}/develop/fmod/getting-started).
+see [Get Started with the Resonance Audio Plugin for FMOD]({{ site.baseurl }}/develop/fmod/getting-started).
 
 
 ## Unity integration
@@ -24,7 +24,7 @@ You can use the Resonance Audio plugin as part of any FMOD Unity project.
 
 
 ### Room effects in Unity FMOD projects
-[Resonance Audio provides room effects in Unity]({{ site.pageurl }}/develop/unity/developer-guide#room-effects-in-unity)
+[Resonance Audio provides room effects in Unity]({{ site.baseurl }}/develop/unity/developer-guide#room-effects-in-unity)
 that let you:
 
 *  Control how sounds react to the size and surface properties of the

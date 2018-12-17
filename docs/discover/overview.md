@@ -32,7 +32,7 @@ Resonance Audio's SDKs and visualization plugins  work with popular tools to
 streamline developers’ and sound designers’ workflows.
 
 Resonance Audio was built with technology optimized for mobile's limited
-computational resources, providing [advantages for developers]({{ site.pageurl }}/develop/overview#developer-advantages)
+computational resources, providing [advantages for developers]({{ site.baseurl }}/develop/overview#developer-advantages)
 who want high quality, cost-effective output.
 
 ## Hear Resonance Audio in action
@@ -58,4 +58,4 @@ To get started working with Resonance Audio, see:
 
 *  [Fundamental concepts]({{ site.baseurl }}/discover/concepts)
 
-*  [Developer overview]({{ site.pageurl }}/develop/overview)
+*  [Developer overview]({{ site.baseurl }}/develop/overview)

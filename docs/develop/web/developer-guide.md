@@ -12,7 +12,7 @@ This guide provides developer information on:
 *  Managing your Resonance Audio SDK package
 
 
-If you are new to the Resonance Audio SDK for Web, see [Getting Started with Resonance Audio for the Web]({{ site.pageurl }}/develop/web/getting-started) to learn how to install the SDK and use it to create an example scene.
+If you are new to the Resonance Audio SDK for Web, see [Getting Started with Resonance Audio for the Web]({{ site.baseurl }}/develop/web/getting-started) to learn how to install the SDK and use it to create an example scene.
 
 
 ## Browser Support
@@ -30,7 +30,7 @@ browsers.
 ## Migrating projects using WebAudio's PannerNode to Resonance Audio
 
 ### Developer advantages
-In addition to several [general developer advantages]({{ site.pageurl }}/develop/overview#developer-advantages),
+In addition to several [general developer advantages]({{ site.baseurl }}/develop/overview#developer-advantages),
 migrating to Resonance Audio has specific benefits for web developers.
 
 Resonance Audio was designed to support Ambisonics and to scale well with a
@@ -86,7 +86,7 @@ For example, here is the same configuration in PannerNode and Resonance Audio:
     source.setPosition(x, y, z);
     resonanceAudio.setListenerPosition(x, y, z);
 
-To start migrating to Resonance Audio, see the [Getting Started with Resonance Audio]({{ site.pageurl }}/develop/web/getting-started) instructions for [installing]({{ site.pageurl }}/develop/web/getting-started#install-the-sdk) and [including]({{ site.pageurl }}/develop/web/getting-started#include-the-sdk-in-your-project) the Resonance Audio SDK in your projects.
+To start migrating to Resonance Audio, see the [Getting Started with Resonance Audio]({{ site.baseurl }}/develop/web/getting-started) instructions for [installing]({{ site.baseurl }}/develop/web/getting-started#install-the-sdk) and [including]({{ site.baseurl }}/develop/web/getting-started#include-the-sdk-in-your-project) the Resonance Audio SDK in your projects.
 
 
 ## Extending the Resonance Audio SDK for Web
