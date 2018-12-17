@@ -28,7 +28,7 @@ The package has the following FMOD::DSP audio plugins.
         <ul>
         <li> Enables binaural spatialization of sound sources created using the
            <b>Resonance Audio Source</b> or <b>Resonance Audio Soundfield</b> plugins.</li>
-        <li>Additionally handles <a href="/develop/fmod/game-engine-integration">room effects simulation</a>.</li>
+        <li>Additionally handles <a href="{{ site.baseurl }}/develop/fmod/game-engine-integration">room effects simulation</a>.</li>
       </ul>
     </td>
    </tr>
@@ -306,6 +306,6 @@ track as the audio file and not on the event master track.
 
 
 ## Next Steps
-* See [Game engine integration](/develop/fmod/game-engine-integration)
+* See [Game engine integration]({{ site.baseurl }}/develop/fmod/game-engine-integration)
   to learn more about using the Resonance Audio FMOD plugin in Unity and Unreal.
 

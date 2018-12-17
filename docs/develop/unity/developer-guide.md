@@ -11,16 +11,16 @@ This guide shows you how to:
 *  Configure Resonance Audio room effects
 *  Use Resonance Audio reverb baking tools
 
-See [Getting started with Resonance Audio for Unity](/develop/unity/getting-started) for
+See [Getting started with Resonance Audio for Unity]({{ site.baseurl }}/develop/unity/getting-started) for
 details on installing the SDK and an overview of Resonance Audio components. This introductory
 guide also includes details on [upgrading projects from GVR Audio components to
-Resonance Audio](/develop/unity/getting-started#upgrading-existing-projects-from-google-vr-audio-components).
+Resonance Audio]({{ site.baseurl }}/develop/unity/getting-started#upgrading-existing-projects-from-google-vr-audio-components).
 
 
 ## Add Resonance Audio components to your scenes
 Resonance Audio components enhance the features of Unity's built-in audio components.
 For details on this enhanced functionality, see
-["Resonance Audio components" in Getting started with Resonance Audio for Unity](/develop/unity/getting-started#resonance-audio-components).
+["Resonance Audio components" in Getting started with Resonance Audio for Unity]({{ site.baseurl }}/develop/unity/getting-started#resonance-audio-components).
 
 
 ### Prerequisite: configure your Unity project to use Resonance Audio
@@ -69,7 +69,7 @@ in order to use Resonance Audio for spatialized audio rendering.
     *  Enable **Spatialize Post Effects** to insert the spatializer effect after
        effect filters.
 
-        <img srcset="/images/unity/sound_source_config.png 2x"></li>
+        <img srcset="{{ site.baseurl }}/images/unity/sound_source_config.png 2x"></li>
 
 1.  (Optional) Add a `ResonanceAudioSource` component to the game object if you
     need the enhanced functionality that it adds to the Unity `AudioSource`.<br>
@@ -116,7 +116,7 @@ scene. This prefab has the required properties already set.
 
 1.  You can adjust audio room properties, such as surface materials and reverb
     modifiers, to fine tune your environment as needed. See
-[Room effects in Unity](/develop/unity/developer-guide#room-effects-in-unity)
+[Room effects in Unity]({{ site.baseurl }}/develop/unity/developer-guide#room-effects-in-unity)
   for more details on configuring room effects.
 
 ### Add a reverb probe to your scene
@@ -185,7 +185,7 @@ that, when crossed, trigger the room effects to toggle on and off or transition
 smoothly from one Resonance Audio Room to another.
 
 ## Reverb baking tools in Unity
-<img srcset="/images/unity/reverb_baking_hero.png 2x">
+<img srcset="{{ site.baseurl }}/images/unity/reverb_baking_hero.png 2x">
 
 Geometry-based reverb baking enables highly realistic reverbs by ray-tracing
 against static scene geometry. This reverb feature complements the
@@ -277,7 +277,7 @@ To create a reverb probe:
     box in the scene view. The box represents the reverb probe's region of
     application.
 
-    <img srcset="/images/unity/reverb_baking_box_wireframe_img2.png 2x">
+    <img srcset="{{ site.baseurl }}/images/unity/reverb_baking_box_wireframe_img2.png 2x">
 
 ### Placing a reverb probe
 
@@ -287,7 +287,7 @@ To create a reverb probe:
 1.  Add probes where reverb is expected to vary spatially, such as in the
     transition between two different spaces (Probe **3**).
 
-<img src="/images/unity/img3_large.png" width="400">
+<img src="{{ site.baseurl }}/images/unity/img3_large.png" width="400">
 
 In general, the more the reverb is expected to vary spatially, the more probes
 are needed.
@@ -326,7 +326,7 @@ If you enable **Only When Visible**, the listener no longer hears the reverb
 baked in the _Cathedral Sanctuary Reverb Probe_, even when the listener is
 inside its region of application.
 
-<img srcset="/images/unity/reverb_baking_onlyvisible_img4.png 2x">
+<img srcset="{{ site.baseurl }}/images/unity/reverb_baking_onlyvisible_img4.png 2x">
 
 
 ### Understanding overlapping reverb probes
@@ -340,13 +340,13 @@ Probe 3, and finally crossed the boundary between Probe 3 and 2. The listener
 is in an overlapping application region of all three probes, but only reverb
 baked in Probe 2 is applied.
 
-<img src="/images/unity/img5_large.png" width="400">
+<img src="{{ site.baseurl }}/images/unity/img5_large.png" width="400">
 
 ### Configure reverb baking settings
 1.  From the menu select **ResonanceAudio** > **Reverb Baking** to open the
     **Reverb Baking** configuration window.
 
-    <img srcset="/images/unity/reverb_baking_window_img6.png 2x">
+    <img srcset="{{ site.baseurl }}/images/unity/reverb_baking_window_img6.png 2x">
 
 #### Map visual materials to acoustic materials
 Support for mapping visual materials to acoustic materials assumes that objects
@@ -363,7 +363,7 @@ each of these visual materials to its own acoustic material.
     All visual materials and the terrain used in the scene are listed in the
     lefthand column.
 
-    <img srcset="/images/unity/material_map_editor_img10.png 2x">
+    <img srcset="{{ site.baseurl }}/images/unity/material_map_editor_img10.png 2x">
 
 1.  Map the visual materials to acoustic materials using the drop-down menus in
     the righthand column.<br>
@@ -390,7 +390,7 @@ each of these visual materials to its own acoustic material.
 1.  Take a look at one of the selected Reverb Probes. In the **Inspector** window,
     there should be some RT60s for different frequency bands (low-frequency to
     high-frequency bands appear left to right).<br><br>
-    <img srcset="/images/unity/reverb_baking_img9.png 2x">
+    <img srcset="{{ site.baseurl }}/images/unity/reverb_baking_img9.png 2x">
 
 1.  Use **Gain**, **Brightness**, and **Time** settings for configuring
     post-baking reverb properties for each probe.
@@ -412,7 +412,7 @@ To exclude game objects from reverb computation, use one of these methods:
     <li>Identify an existing layer or define a new layer to exclude.
       For example, in the _ReverbBakingDemo_ scene, the _Terrain_ game object
       is assigned to the "Ignore Raycast" layer.<br><br>
-      <img srcset="/images/unity/ignore_raycast_img7.png 2x">
+      <img srcset="{{ site.baseurl }}/images/unity/ignore_raycast_img7.png 2x">
   </li>
    <li>Uncheck this layer in the **Reverb Mask** drop-down menu to exclude it
       from reverb computations.
@@ -434,7 +434,7 @@ reverb computations.
     For example, in the demo scene, the **Bathroom_door** object is not static.
     If **Include Non-Static Game Objects** is disabled, the _Bathroom_door_
     object does not appear in **Visualize Mode**.<br><br>
-    <img srcset="/images/unity/reverb_baking_img8.png 2x">
+    <img srcset="{{ site.baseurl }}/images/unity/reverb_baking_img8.png 2x">
 
     This demo scene uses the following models, which are licensed under
     [CC BY 3.0](//creativecommons.org/licenses/by/3.0/){: .external}:

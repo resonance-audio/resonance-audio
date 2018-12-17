@@ -8,12 +8,12 @@ exclude_from_menu: true
 This guide shows you how to configure and control spatialization, room effects,
 and occlusion settings in real time using the Resonance Audio plugin for Unreal.
 
-The steps here build on the completed steps in [Getting Started with the Resonance Audio Plugin for Unreal](/develop/unreal/getting-started). If you are new to working with the Resonance Audio plugin for Unreal or have not yet set up
+The steps here build on the completed steps in [Getting Started with the Resonance Audio Plugin for Unreal]({{ site.baseurl }}/develop/unreal/getting-started). If you are new to working with the Resonance Audio plugin for Unreal or have not yet set up
 your development environment, start there.
 
 
 ## Prerequisites
-This guide uses the `Blueprint_Effect_Fire` object that you [set up in the Getting Started guide](/develop/unreal/getting-started#create_a_new_object_using_a_blueprint).
+This guide uses the `Blueprint_Effect_Fire` object that you [set up in the Getting Started guide]({{ site.baseurl }}/develop/unreal/getting-started#create-a-new-object-using-a-blueprint).
 
 To follow the steps included here, you'll need the same `Blueprint_Effect_Fire`
 object.
@@ -128,7 +128,7 @@ The above functions require a **Target**. In our case, these are
 
 1.  In the **Details** window on the right, find the **Default Value** setting.
 
-1.  Set the default value to the name of the [plugin settings asset that you created earlier](#create_a_spatialization_plugin_settings_asset).
+1.  Set the default value to the name of the [plugin settings asset that you created earlier](#create-a-spatialization-plugin-settings-asset).
     This asset's name is `FireSoundSpatializationSettings`.
 
 1.  You can now use this reference as a target for **Set Sound Source Spread** and
@@ -139,7 +139,7 @@ The above functions require a **Target**. In our case, these are
 ### Review your results
 You should now have something like this:
 
-<img src="/images/unreal/unreal_result_image.png">
+<img src="{{ site.baseurl }}/images/unreal/unreal_result_image.png">
 
 The green inlets in the functions indicate that they expect float values. These
 values are set whenever the functions are executed (gray triangles).
@@ -150,7 +150,7 @@ also configure where the float data comes from in the game.
 As an example, the following blueprint uses numeric keys +/- to change spread by
 increments of five degrees and outputs debug messages to the screen:
 
-<img src="/images/unreal/unreal_numeric_keys_new.png">
+<img src="{{ site.baseurl }}/images/unreal/unreal_numeric_keys_new.png">
 
 ## Using the Reverb plugin
 Resonance Audio lets you add and control Room Effects in your game using either
@@ -299,7 +299,7 @@ with the exception that now you should use
 **Resonance Audio Reverb Plugin Preset** as your object reference.
 
 Within a blueprint, you can use the following functions to control Room Effects:
-<img src="/images/unreal/resonance_audio_blueprint_functions.png" width="400">
+<img src="{{ site.baseurl }}/images/unreal/resonance_audio_blueprint_functions.png" width="400">
 
 ### Add or remove Room Effects for individual sound sources
 You can choose which sound sources are affected by room effects. To do this:
