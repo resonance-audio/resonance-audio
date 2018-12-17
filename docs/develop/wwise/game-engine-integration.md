@@ -10,7 +10,7 @@ This guide shows you how to integrate the Resonance Audio plugins for Wwise into
 your projects.
 
 If you are new to the Resonance Audio plugins for Wwise, see
-[Getting Started with the Resonance Audio Plugin for Wwise](index).
+[Getting Started with the Resonance Audio Plugin for Wwise]({{ site.baseurl }}/develop/wwise/getting-started).
 
 
 ## About the Resonance Audio Wwise integration

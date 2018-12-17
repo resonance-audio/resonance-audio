@@ -174,7 +174,7 @@ Note: You can also create an empty sound source. To do this, create a new
 
 The Resonance Audio plugin lets you binaurally decode First Order Ambisonic
 soundfield files that you import into your project. Your soundfields are decoded
-and filtered with the same [Head Related Transfer Functions (HRTFs)](/discover/concepts#simulating-sound-waves-interacting-with-human-ears)
+and filtered with the same [Head Related Transfer Functions (HRTFs)]({{ site.baseurl }}/discover/concepts#simulating-sound-waves-interacting-with-human-ears)
 used to create the fire sound spatialization effect.
 
 The Resonance Audio plugin supports Ambisonic audio encoded in the **AmbiX** format
