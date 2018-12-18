@@ -1,6 +1,7 @@
 ---
-title: Wwise plugin
+title: Wwise
 weight: 180
+getting_started: true
 ---
 # Getting started with the Resonance Audio plugin for Wwise
 

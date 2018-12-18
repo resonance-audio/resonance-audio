@@ -1,6 +1,7 @@
 ---
-title: Getting started with Resonance Audio for Android Studio
+title: Android Studio
 weight: 110
+getting_started: true
 ---
 
 <img srcset="{{ site.baseurl }}/images/android/android_hero_image.png 2x">

@@ -1,7 +1,7 @@
 ---
-title: Getting started with Resonance Audio for Unity
+title: Unity
 weight: 140
-
+getting_started: true
 ---
 
 <img srcset="{{ site.baseurl }}/images/unity/unity_hero_dark.png 2x">

@@ -1,6 +1,6 @@
 ---
 title: Resonance Audio Downloads
-weight: 2
+weight: 10
 ---
 
 Platform | Description | Download

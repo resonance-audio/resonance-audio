@@ -1,6 +1,7 @@
 ---
-title: Getting started with Audio Monitor VST Plugin
+title: Audio Monitor VST
 weight: 160
+getting_started: true
 ---
 # Getting started with the Resonance Audio Monitor VST Plugin
 

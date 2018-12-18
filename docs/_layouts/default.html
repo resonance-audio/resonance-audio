@@ -31,10 +31,11 @@
     <div id="menu">
         <div class="pure-menu">
             <a class="pure-menu-heading" href="{{ site.baseurl }}/">Resonance Audio</a>
+
             <ul class="pure-menu-list">
               {% assign pages = site.pages | sort:"weight"  %}
               {% for node in pages %}
-                {% unless node.exclude_from_menu %}
+                {% unless node.exclude_from_menu or node.getting_started %}
                   {% if node.url == "/assets/css/style.css" %}
                     <!-- Do nothing -->
                   {% elsif page.url == node.url %}
@@ -45,19 +46,38 @@
                 {% endunless %}
               {% endfor %}
             </ul>
-            <ul class="pure-menu-list">
-                    <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/fmod" class="pure-menu-link">Resonance Audio FMOD Reference</a></li>
+              <ul class="pure-menu-list">
+                <li class="pure-menu-item"> <h2>Getting Started</h2>
+                  <ul class="pure-menu-list">
+                  {% assign pages = site.pages | sort:"weight"  %}
+                  {% for node in pages %}
+                  {% if node.getting_started %}
+                  {% if node.url == "/assets/css/style.css" %}
+                    <!-- Do nothing -->
+                  {% elsif page.url == node.url %}
+                    <li class="pure-menu-item pure-menu-selected"><a href="{{ site.baseurl }}{{ node.url }}" class="pure-menu-link">{{ node.title }}</a></li>
+                  {% else %}
+                    <li class="pure-menu-item"><a href="{{ site.baseurl }}{{ node.url }}" class="pure-menu-link">{{ node.title }}</a></li>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+                </ul>
+                </li>
             </ul>
-            <ul class="pure-menu-list">
-              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/unity" class="pure-menu-link">Resonance Audio Unity Reference</a></li>
-            </ul>
-            <ul class="pure-menu-list">
-              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/web/ResonanceAudio" class="pure-menu-link">Resonance Audio Web Reference</a></li>
-              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/web/Source" class="pure-menu-link">Resonance Audio Web Source</a></li>
-              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/web/Utils" class="pure-menu-link">Resonance Audio Web Utils</a></li>
-            </ul>
-            <ul class="pure-menu-list">
-              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/wwise" class="pure-menu-link">Resonance Audio Wwise Reference</a></li>
+
+              <ul class="pure-menu-list">
+                <li class="pure-menu-item"> <h2>Reference</h2>
+                  <ul class="pure-menu-list">
+                      <li class="pure-menu-item"><a href="//developers.google.com//vr/reference/android/com/google/vr/sdk/audio/package-summary" class="pure-menu-link">Android SDK Reference</a></li>
+                      <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/fmod" class="pure-menu-link">FMOD Reference</a></li>
+                      <li class="pure-menu-item"><a href="//developers.google.com/vr/ios/reference" class="pure-menu-link">iOS SDK Reference</a></li>
+                      <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/unity" class="pure-menu-link">Unity Reference</a></li>
+              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/web/ResonanceAudio" class="pure-menu-link">Web Reference</a></li>
+              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/web/Source" class="pure-menu-link">Web Source Reference</a></li>
+              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/web/Utils" class="pure-menu-link">Web Utils Reference</a></li>
+              <li class="pure-menu-item"><a href="{{ site.baseurl }}/reference/wwise" class="pure-menu-link">Wwise Reference</a></li>
+                </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -74,6 +94,7 @@
 
 <!-- Javascript for collapsing/expanding the menu -->
 <script src="{{ site.baseurl }}/third_party/pure-layout-side-menu/ui.js"></script>
+<script src="{{ site.baseurl }}/css/collapse.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 ---
-title: Getting started with the Resonance Audio SDK for iOS
+title: Resonance Audio SDK for iOS
 weight: 130
-
+getting_started: true
 ---
 
 <img src="{{ site.baseurl }}/images/ios/ios_hero_image.png">

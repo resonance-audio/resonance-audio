@@ -36,7 +36,7 @@ With Resonance Audio, bring dynamic spatial sound into your VR, AR, gaming, or v
     icon="images/icon_fmod.png" title="FMOD"%}
 
 {% include row-item.html url="develop/wwise/getting-started"  toast-img="images/toaster_images/toast-wwise.png" 
-    icon="images/icons/icon_wwise.png" title="wWise"%}
+    icon="images/icons/icon_wwise.png" title="Wwise"%}
 </div>	
 <hr/>
 

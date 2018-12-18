@@ -1,6 +1,7 @@
 ---
-title: Get started with Resonance Audio for FMOD
+title: FMOD
 weight: 120
+getting_started: true
 ---
 
 <img src="{{ site.baseurl }}/images/fmod/fmod_hero.png">

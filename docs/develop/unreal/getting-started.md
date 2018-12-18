@@ -1,6 +1,7 @@
 ---
-title: Get Started with Resonance Audio for Unreal
+title: Unreal
 weight: 150
+getting_started: true
 ---
 
 <img src="{{ site.baseurl }}/images/unreal/unreal-hero-image.png">

@@ -1,6 +1,7 @@
 ---
 title: Installing the Latest Resonance Audio Plugin Version From GitHub
 weight: 122
+exclude_from_menu: true
 ---
 
 If you want to try the latest Resonance Audio features that might not be in
