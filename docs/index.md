@@ -54,21 +54,3 @@ With Resonance Audio, bring dynamic spatial sound into your VR, AR, gaming, or v
     icon="images/icons/DAW-Icon.png" title="DAW VST plugin"%}
 </div>
 </section>
-
-<section class="devsite-landing-row
-                        devsite-landing-row-4-up
-                        resonance-audio-row-get-started resonance-audio-row-vsep
-                        devsite-background devsite-background-grey">
-<h1>Resources</h1>
-<h2>Everything you need to get started</h2>
-<div class="devsite-landing-row-group">
-	{% include row-item-no-image.html url="develop/downloads" icon="images/icons/icon_sdk_hover@2x.png" 
-		title="Downloads" description="Get an SDK, plugin, or library"%}
-
-	{% include row-item-no-image.html url="develop/overview" icon="images/icons/icon_guides_hover@2x.png" 
-		title="Guides" description="Start using Resonance Audio"%}
-
-	{% include row-item-no-image.html url="reference/overview" icon="images/icons/icon_api_hover@2x.png" 
-		title="APIs" description="Dive into the details"%}
-</div>
-</section>
