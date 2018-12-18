@@ -9,7 +9,8 @@ html {
 #table-of-contents {
   position: relative;
   float: right;
-  width: 600px;
+/* cw was 600px; */
+  width: 300px;
   margin-left: 30px;
   margin-bottom: 10px;
   border-style: solid;

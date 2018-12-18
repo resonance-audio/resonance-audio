@@ -28,12 +28,12 @@ This is the parent `<div>` that contains the menu and the content area.
     padding-left: 0;
 }
     #layout.active #menu {
-        left: 150px;
-        width: 850px;
+        left: 250px;
+        width: 250px;
     }
 
     #layout.active .menu-link {
-        left: 150px;
+        left: 250px;
     }
 /*
 The content `<div>` is where all your content goes.
@@ -79,8 +79,8 @@ appears on the left side of the page.
 */
 
 #menu {
-    margin-left: -150px; /* "#menu" width */
-    width: 350px;
+    margin-left: -250px; /* "#menu" width */
+    width: 250px;
     position: fixed;
     top: 0;
     left: 0;
@@ -206,7 +206,7 @@ small screens.
 /*
 Hides the menu at `48em`, but modify this based on your app's needs.
 */
-@media (min-width: 48em) {
+@media (min-width: 58em) {
 
     .header,
     .content {
@@ -215,25 +215,25 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     }
 
     #layout {
-        padding-left: 150px; /* left col width "#menu" */
+        padding-left: 250px; /* left col width "#menu" */
         left: 0;
     }
     #menu {
-        left: 150px;
+        left: 250px;
     }
 
     .menu-link {
         position: fixed;
-        left: 150px;
+        left: 250px;
         display: none;
     }
 
     #layout.active .menu-link {
-        left: 150px;
+        left: 250px;
     }
 }
 
-@media (max-width: 48em) {
+@media (max-width: 58em) {
     /* Only apply this when the window is small. Otherwise, the following
     case results in extra padding on the left:
         * Make the window small.
@@ -242,7 +242,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     */
     #layout.active {
         position: relative;
-        left: 150px;
+        left: 250px;
     }
 }
 
