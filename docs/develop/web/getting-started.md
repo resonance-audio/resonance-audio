@@ -2,9 +2,7 @@
 title: Resonance Audio SDK for Web
 weight: 170
 getting_started: true
-
 ---
-# Getting Started with the Resonance Audio SDK for Web
 
 <img srcset="{{ site.baseurl }}/images/web/web_hero_image.png 2x">
 

@@ -3,7 +3,6 @@ title: Wwise
 weight: 180
 getting_started: true
 ---
-# Getting started with the Resonance Audio plugin for Wwise
 
 <img srcset="{{ site.baseurl }}/images/wwise/wwise_hero2.png 2x">
 

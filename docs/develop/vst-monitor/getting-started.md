@@ -3,7 +3,6 @@ title: Audio Monitor VST
 weight: 160
 getting_started: true
 ---
-# Getting started with the Resonance Audio Monitor VST Plugin
 
 <img src="{{ site.baseurl }}/images/vst/vst_updated_hero.png">
 
