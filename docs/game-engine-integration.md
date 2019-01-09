@@ -1,8 +1,3 @@
----
-title: Wwise plugin Game Engine Integration
-weight: 181
-exclude_from_menu: true
----
 # Resonance Audio Game Engine Integration
 
 
@@ -10,7 +5,7 @@ This guide shows you how to integrate the Resonance Audio plugins for Wwise into
 your projects.
 
 If you are new to the Resonance Audio plugins for Wwise, see
-[Getting Started with the Resonance Audio Plugin for Wwise]({{ site.baseurl }}/develop/wwise/getting-started).
+[Getting Started with the Resonance Audio Plugin for Wwise](index).
 
 
 ## About the Resonance Audio Wwise integration
@@ -67,7 +62,7 @@ recompile any code during installation.
 1.  Copy the Resonance Audio plugin dynamic libraries for each platform into
     the corresponding DSP folders in the Wwise integration.
 1.  You can now access the plugins within Unity. See the following instructions
-    for including the [room effects in Unity]({{ site.baseurl }}/develop/unity/developer-guide#room-effects-in-unity) using the
+    for including the [room effects in Unity](https://developers.google.com/resonance-audio/develop/unity/developer-guide#room_effects_in_unity) using the
     provided scripts.
 
 Caution:  Make sure to copy the **GeneratedSoundbanks** folder from your Wwise
@@ -107,7 +102,10 @@ To use the included audio room component:
     `WwiseResonanceAudioRoom` components added to the scene are updated
     automatically with the corresponding plugin name.
 
-See ["Room Effects in Unity" in the Unity Developer Guide]({{ site.baseurl }}/develop/unity/developer-guide#room-effects-in-unity)
+<!-- developers.google.com anchors need underscores, in contrast to github which
+needs dashes
+-->
+See ["Room Effects in Unity" in the Unity Developer Guide](https://developers.google.com/resonance-audio/develop/unity/developer-guide#room_effects_in_unity)
 for more details on working with audio rooms in your Unity scenes.
 
 ## Unreal integration
