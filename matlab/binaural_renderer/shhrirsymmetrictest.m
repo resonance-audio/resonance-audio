@@ -23,9 +23,8 @@ clearvars
 close all
 clc
 
-% Import Ambisonic functions.
-thisScriptPath = fileparts(mfilename('fullpath'));
-addpath(fullfile(thisScriptPath, '../ambisonics/shelf_filters/'));
+% Import required ambisonic functions.
+addpath('../ambisonics/shelf_filters/');
 
 % Tolerated error margin equivalent to -60dB;
 ERROR_MARGIN = 0.001;

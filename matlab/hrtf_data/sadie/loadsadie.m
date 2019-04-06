@@ -67,7 +67,7 @@ if (exist(savedir, 'dir') == 0)
 end
 
 sadieFilesFolder = ...
-'../third_party/SADIE_hrtf_database/WAV/Subject_002/DFC/48K_24bit/';
+'../../../third_party/SADIE_hrtf_database/WAV/Subject_002/DFC/48K_24bit/';
 sadieFiles = dir([sadieFilesFolder, '*.wav']);
 
 for fileIndex = 1:length(sadieFiles)
@@ -132,4 +132,3 @@ for i = 1:length(angles)
 end
 
 disp('Success!');
-

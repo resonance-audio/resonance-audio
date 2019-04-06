@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 %}
 
-function shHrir = shhrirsymmetric(hrirPath,order, dualBand)
+function shHrir = shhrirsymmetric(hrirPath, order, dualBand)
 %SHHRIRSYMMETRIC Returns Spherical Harmonics representation of HRIRs.
 %
 %  inputs:
@@ -29,6 +29,10 @@ function shHrir = shhrirsymmetric(hrirPath,order, dualBand)
 %  shHrir   - Spherical harmonic encoded HRIRs with spherical harmonic
 %             components saved as channels. Should be the same length as
 %             original HRIRs.
+
+% Import required ambisonic functions.
+addpath( '../../ambisonics/ambix/');
+addpath( '../../ambisonics/shelf_filters/');
 
 if nargin < 2 || nargin > 3
   error('Number of arguments must be 2 or 3');

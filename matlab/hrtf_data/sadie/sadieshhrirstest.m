@@ -20,6 +20,9 @@ clearvars
 close all
 clc
 
+% Import required functions.
+addpath('../../binaural_renderer/');
+
 % Tolerated error margin equivalent to -60dB;
 ERROR_MARGIN = 0.001;
 % Target sampling rate.

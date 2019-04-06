@@ -27,6 +27,9 @@ function [] = sadieshhrirs(ambisonicOrder, shelfFilter)
 %   ambisonicOrder - Required Ambisonic order of the encoded SH-HRIRs.
 %   shelfFilter    - Whether to use or not Ambisonic shelf-filters (bool).
 
+% Import required functions.
+addpath( '../../binaural_renderer/');
+
 % Target sampling rate.
 TARGET_SAMPLE_RATE = 48000;
 
@@ -46,8 +49,7 @@ switch ambisonicOrder
 end
 
 % Output path for the SH HRIR WAV.
-savedir = ['sadie_002_symmetric_sh_hrir_o_', ...
-    num2str(ambisonicOrder), '/'];
+savedir = ['sadie_002_symmetric_sh_hrir_o_', num2str(ambisonicOrder), '/'];
 
 if (exist(savedir, 'dir') == 0)
     mkdir(savedir);
