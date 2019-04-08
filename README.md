@@ -147,6 +147,14 @@ To build and run the Resonance Audio unit tests:
 
     ./$YOUR_LOCAL_REPO/build.sh -t=RESONANCE_AUDIO_TESTS
 
+## Citations
+
+If you find Resonance Audio useful and would like to cite it in your publication, please use:
+
+Gorzel, M., Allen, A., Kelly, I., Kammerl, J., Gugnormusler, A., Yeh, H., and Boland, F., *"Efficient Encoding and Decoding of Binaural Sound with Resonance Audio"*, In proc. of the AES International Conference on Immersive and Interactive Audio, March 2019
+
+The full paper is available (open access) at: http://www.aes.org/e-lib/browse.cfm?elib=20446 ([BibTeX](http://www.aes.org/e-lib/browse.cfm?elib=20446&fmt=bibtex))
+
 ## Contributing to Resonance Audio
 
 If you would like to contribute changes to the Resonance Audio project, please
