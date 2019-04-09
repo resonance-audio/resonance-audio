@@ -14,135 +14,72 @@ See the License for the specific language governing permissions and
 limitations under the License.
 %}
 
-% Tests the spherical harmonics encoding function (shhrirsymmetric) of
-% HRIRs as well as the binaural rendering function
-% shbinauralrendersymmetric by comparing the binaural stereo output to the
-% standard pseudo-inverse binaural decoding method.
+% Tests the spherical harmonics HRIR encoding function (shhrirsymmetric) as well
+% as the binaural rendering function shbinauralrendersymmetric by comparing the
+% binaural stereo output to the 'virtual loudspeakers' binaural decoding method.
 
 clearvars
 close all
 clc
 
 % Import required ambisonic functions.
+addpath('../ambisonics/ambix/');
 addpath('../ambisonics/shelf_filters/');
 
-% Tolerated error margin equivalent to -60dB;
+% Tolerated error margin equivalent to -60dB.
 ERROR_MARGIN = 0.001;
 SAMPLING_RATE = 48000;
 INPUT = [1; zeros(511, 1)];
-SOURCE_AZIMUTH_RAD = pi / 3;
-SOURCE_ELEVATION_RAD =  pi / 4;
+SOURCE_AZIMUTH_RAD = pi * (2 * rand(1) - 1);
+SOURCE_ELEVATION_RAD =  pi * (rand(1) - 0.5);
+MAX_AMBISONIC_ORDER = 5;
 
-%% Tests the first order case with no shelf-filters.
-AMBI_ORDER_1 = 1;
+% Paths to HRIRs for each binarual decoder
+HRIR_PATH = '../hrtf_data/sadie/';
+CONFIGS = {'symmetric_cube', ...
+           'symmetric_dodecahedron_faces', ...
+           'symmetric_lebedev26', ...
+           'symmetric_pentakis_dodecahedron', ...
+           'symmetric_pentakis_icosidodecahedron'};
 
-% Get the HRIRs for the first order decode.
-HRIR_PATH_1 = '../hrtf_data/sadie/sadie_subject_002_symmetric_cube';
-[ hrirMatrix1, ~, hrirAngles1 ] = loadhrirssymmetric( HRIR_PATH_1 );
-
-% Encode the first order Ambisonic sound source.
-encodedInput1 = ambencode(INPUT, AMBI_ORDER_1, SOURCE_AZIMUTH_RAD, ...
-    SOURCE_ELEVATION_RAD);
-
-% Decode input for the above virtual speaker array.
-decodedInput1 = ambdecode(encodedInput1, hrirAngles1(:, 1), ...
-    hrirAngles1(:, 2));
-
-% Render binaurally using the 'standard' decoder method.
-binauralOutputOld1 = binauralrendersymmetric(decodedInput1, hrirMatrix1);
-
-% Render binaurally using SH-encoded HRIRs method.
-shHrirs1 = shhrirsymmetric( HRIR_PATH_1, AMBI_ORDER_1 );
-binauralOutputNew1 = shbinauralrendersymmetric(encodedInput1, shHrirs1);
-
-% Check whether the binaural outputs using both methods are the same.
-assert(size(binauralOutputNew1, 1) == size(binauralOutputOld1, 1));
-for sample = 1:size(binauralOutputNew1, 1)
-    assert((binauralOutputNew1(sample, 1) - ...
-        binauralOutputOld1(sample, 1)) < ERROR_MARGIN);
-    assert((binauralOutputNew1(sample, 2) - ...
-        binauralOutputOld1(sample, 2)) < ERROR_MARGIN);
-end
-
-%% Tests the third order case with no shelf-filters.
-AMBI_ORDER_3 = 3;
-
-% Get the HRIRs for the third order decode.
-HRIR_PATH_3 = '../hrtf_data/sadie/sadie_subject_002_symmetric_lebedev26';
-[ hrirMatrix3, ~, hrirAngles3 ] = loadhrirssymmetric( HRIR_PATH_3 );
-
-% Encode the third order Ambisonic sound source.
-encodedInput3 = ambencode(INPUT, AMBI_ORDER_3, SOURCE_AZIMUTH_RAD, ...
-    SOURCE_ELEVATION_RAD);
-
-% Decode input for the above virtual speaker array.
-decodedInput3 = ambdecode(encodedInput3, hrirAngles3(:, 1), ...
-    hrirAngles3(:, 2));
-
-% Render binaurally using the 'standard' decoder method.
-binauralOutputOld3 = binauralrendersymmetric(decodedInput3, hrirMatrix3);
-
-% Render binaurally using SH-encoded HRIRs method.
-shHrirs3 = shhrirsymmetric( HRIR_PATH_3, AMBI_ORDER_3 );
-binauralOutputNew3 = shbinauralrendersymmetric(encodedInput3, shHrirs3);
-
-% Check whether the binaural outputs using both methods are the same.
-assert(size(binauralOutputNew3, 1) == size(binauralOutputOld3, 1));
-for sample = 1:size(binauralOutputNew3, 1)
-    assert((binauralOutputNew3(sample, 1) - ...
-        binauralOutputOld3(sample, 1)) < ERROR_MARGIN);
-    assert((binauralOutputNew3(sample, 2) - ...
-        binauralOutputOld3(sample, 2)) < ERROR_MARGIN);
-end
-
-%% Test the first order case with shelf-filters.
-% Encode the first order Ambisonic sound source.
-encodedInput1sf = ambishelffilter(encodedInput1, SAMPLING_RATE);
-
-% Decode input for the above virtual speaker array.
-decodedInput1sf = ambdecode(encodedInput1sf, hrirAngles1(:, 1), ...
-    hrirAngles1(:, 2));
-
-% Render binaurally using the 'standard' decoder method.
-binauralOutputOld1sf = binauralrendersymmetric(decodedInput1sf, ...
-    hrirMatrix1);
-
-% Render binaurally using SH-encoded HRIRs method.
-shHrirs1sf = shhrirsymmetric( HRIR_PATH_1, AMBI_ORDER_1, true );
-binauralOutputNew1sf = shbinauralrendersymmetric(encodedInput1, ...
-    shHrirs1sf);
-
-% Check whether the binaural outputs using both methods are the same.
-assert(size(binauralOutputNew1sf, 1) == size(binauralOutputOld1sf, 1));
-for sample = 1:size(binauralOutputNew1sf, 1)
-    assert((binauralOutputNew1sf(sample, 1) - ...
-        binauralOutputOld1sf(sample, 1)) < ERROR_MARGIN);
-    assert((binauralOutputNew1sf(sample, 2) - ...
-        binauralOutputOld1sf(sample, 2)) < ERROR_MARGIN);
-end
-
-%% Test the third order case with shelf-filters.
-% Encode the first order Ambisonic sound source.
-encodedInput3sf = ambishelffilter(encodedInput3, SAMPLING_RATE);
-
-% Decode input for the above virtual speaker array.
-decodedInput3sf = ambdecode(encodedInput3sf, hrirAngles3(:, 1), ...
-    hrirAngles3(:, 2));
-
-% Render binaurally using the 'standard' decoder method.
-binauralOutputOld3sf = binauralrendersymmetric(decodedInput3sf, ...
-    hrirMatrix3);
-
-% Render binaurally using SH-encoded HRIRs method.
-shHrirs3sf = shhrirsymmetric( HRIR_PATH_3, AMBI_ORDER_3, true );
-binauralOutputNew3sf = shbinauralrendersymmetric(encodedInput3, ...
-    shHrirs3sf);
-
-% Check whether the binaural outputs using both methods are the same.
-assert(size(binauralOutputNew3sf, 1) == size(binauralOutputOld3sf, 1));
-for sample = 1:size(binauralOutputNew3sf, 1)
-    assert((binauralOutputNew3sf(sample, 1) - ...
-        binauralOutputOld3sf(sample, 1)) < ERROR_MARGIN);
-    assert((binauralOutputNew3sf(sample, 2) - ...
-        binauralOutputOld3sf(sample, 2)) < ERROR_MARGIN);
+for ambOrder = 1:MAX_AMBISONIC_ORDER
+    for shelfFilter = 0:1 % when 1, use shelf-filters.
+        
+        % Get the HRIRs for the required Ambisonic binaural decoder.
+        currentHrirPath = [HRIR_PATH, 'sadie_subject_002_', CONFIGS{ambOrder}];
+        [hrirMatrix, ~, hrirAngles] = loadhrirssymmetric(currentHrirPath);
+        
+        % Encode the sound source.
+        encodedInput = ambencode(INPUT, ambOrder, SOURCE_AZIMUTH_RAD, ...
+            SOURCE_ELEVATION_RAD);
+        
+        if shelfFilter == 1
+            % Shelf-filter the encoded input.
+            encodedInputSf = ambishelffilter(encodedInput, SAMPLING_RATE);
+            decodedInput = ambdecode(encodedInputSf, hrirAngles(:, 1), ...
+                hrirAngles(:, 2));
+            
+        else 
+            decodedInput = ambdecode(encodedInput, hrirAngles(:, 1), ...
+                hrirAngles(:, 2));
+        end
+        
+        % Render binaurally using the 'virtual loudspeakers' method.
+        binauralOutputOld = binauralrendersymmetric(decodedInput, hrirMatrix);
+        
+        % Render binaurally using SH-encoded HRIRs method.
+        shHrirs = shhrirsymmetric(currentHrirPath, ambOrder, shelfFilter);
+        binauralOutputNew = shbinauralrendersymmetric(encodedInput, shHrirs);
+        
+        % Check whether the binaural outputs using both methods are the same.
+        assert(size(binauralOutputNew, 1) == size(binauralOutputOld, 1));
+        for sample = 1:size(binauralOutputNew, 1)
+            assert((binauralOutputNew(sample, 1) - ...
+                binauralOutputOld(sample, 1)) < ERROR_MARGIN);
+            assert((binauralOutputNew(sample, 2) - ...
+                binauralOutputOld(sample, 2)) < ERROR_MARGIN);
+        end
+        disp(['Result for Ambisonic order ', num2str(ambOrder), ...
+              ', shelf-filter = ', num2str(shelfFilter), ': OK!']);
+    end
 end
