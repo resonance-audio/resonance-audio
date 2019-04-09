@@ -47,7 +47,7 @@ party source code.
 _Note: On Windows, these scripts can be executed in the Git-Bash console (which
 gets installed as part of Git for Windows)._
 
-#### Core Dependencies ([pffft](https://bitbucket.org/jpommier/pffft), [eigen](https://bitbucket.org/eigen/eigen), [googletest](https://github.com/google/googletest), [SADIE Binaural Measurements](https://www.york.ac.uk/sadie-project/binaural.html))
+#### Core Dependencies ([pffft](https://bitbucket.org/jpommier/pffft), [eigen](https://bitbucket.org/eigen/eigen), [googletest](https://github.com/google/googletest), [SADIE Binaural Measurements](https://www.york.ac.uk/sadie-project/database_old.html))
 
 To clone the dependencies into the repository, run:
 
@@ -90,10 +90,10 @@ To install the SDK on Windows:
 3.  Right-click on `Microsoft Visual C++ Build Tools`, and select `Change`
 4.  Install `MFC SDK`
 
-#### DAW Tools Dependencies ([VST2 Audio Plug-Ins SDK](https://download.steinberg.net/sdk_downloads))
+#### DAW Tools Dependencies ([VST2 Audio Plug-Ins SDK](https://www.steinberg.net/vst3sdk))
 
 To add the additional DAW Tools dependencies, download the [Steinberg's VST
-3.X.X Audio Plug-Ins SDK](https://download.steinberg.net/sdk_downloads/) (which
+3.X.X Audio Plug-Ins SDK](https://www.steinberg.net/vst3sdk) (which
 includes the VST2 Audio Plug-Ins SDK) and extract the package into `third_party`
 subfolder.
 
