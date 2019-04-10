@@ -31,8 +31,8 @@ function shHrir = shhrirsymmetric(hrirPath, order, dualBand)
 %             original HRIRs.
 
 % Import required ambisonic functions.
-addpath( '../../ambisonics/ambix/');
-addpath( '../../ambisonics/shelf_filters/');
+addpath( '../ambisonics/ambix/');
+addpath( '../ambisonics/shelf_filters/');
 
 if nargin < 2 || nargin > 3
   error('Number of arguments must be 2 or 3');
@@ -60,7 +60,7 @@ for angle = 1:size(anglesSymmetric, 1)
 end
 
 decodingMatrix = ambdecodematrix(order, angles(:, 1), angles(:, 2));
-shHrir = (decodingMatrix * hrirMatrixFull')';
+shHrir = hrirMatrixFull * decodingMatrix';
 
 % Perform dual-band MaxRe pre-filtering, if required.
 if dualBand == 1

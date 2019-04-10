@@ -35,6 +35,9 @@ function audioOut = shbinauralrendersymmetric(audioIn, shHrirs)
 %
 %   audioOut  - Binaural 2-channel output.
 
+% Import required ambisonic functions.
+addpath( '../ambisonics/ambix/');
+
 if nargin ~= 2
     error('Number of arguments must be exactly 2.');
 end
@@ -63,11 +66,11 @@ for channel = 1:numShHrirsChannels
     [~, m] = getnm(harmonic);
     filteredAudioIn = fftfilt(audioIn(:, channel), shHrirs(:, channel));
     if m < 0
-        % Asymetric spherical harmonic case.
+        % Antisymmetric spherical harmonic case (wrt the median plane).
         audioOut(:, 1) = audioOut(:, 1) + filteredAudioIn;
         audioOut(:, 2) = audioOut(:, 2) - filteredAudioIn;
     else
-        % Symetric spherical harmonic case.
+        % Symmetric spherical harmonic case (wrt the median plane).
         audioOut(:, 1) = audioOut(:, 1) + filteredAudioIn;
         audioOut(:, 2) = audioOut(:, 2) + filteredAudioIn;
     end
