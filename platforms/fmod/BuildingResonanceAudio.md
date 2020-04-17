@@ -1,6 +1,5 @@
 # Building Resonance Audio
 
-Our version of Resonance Audio lives in perforce in \\thirdparty\google\resonance\
 To retrieve latest changes from Resonance Audio project, clone from https://github.com/resonance-audio/resonance-audio.git and instructions for basic setup https://github.com/resonance-audio/resonance-audio
 Each platform requires api/lowlevel/inc/* as setup in the fmod sdk in order to build the plugin.
 * For Windows, this should be located in C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc
