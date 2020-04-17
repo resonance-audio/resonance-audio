@@ -92,6 +92,7 @@ enum ListenerParams {
 enum SoundfieldParams {
   kSoundfieldGain = 0,
   kSoundfieldAttributes3D,
+  kSoundfieldOverallGain,
   kNumSoundfieldParameters
 };
 
@@ -109,6 +110,7 @@ enum SourceParams {
   kBypassRoom,
   kEnableNearField,
   kNearFieldGain,
+  kSourceOverallGain,
   kNumSourceParameters
 };
 
@@ -117,6 +119,7 @@ static FMOD_DSP_PARAMETER_DESC listener_room_properties_param;
 
 static FMOD_DSP_PARAMETER_DESC soundfield_gain_param;
 static FMOD_DSP_PARAMETER_DESC soundfield_3d_attributes_param;
+static FMOD_DSP_PARAMETER_DESC soundfield_overall_gain;
 
 static FMOD_DSP_PARAMETER_DESC source_gain_param;
 static FMOD_DSP_PARAMETER_DESC source_spread_param;
@@ -130,6 +133,7 @@ static FMOD_DSP_PARAMETER_DESC source_3d_attributes_param;
 static FMOD_DSP_PARAMETER_DESC source_bypass_room_param;
 static FMOD_DSP_PARAMETER_DESC source_enable_near_field_param;
 static FMOD_DSP_PARAMETER_DESC source_near_field_gain_param;
+static FMOD_DSP_PARAMETER_DESC source_overall_gain;
 
 FMOD_DSP_PARAMETER_DESC
 *listener_dsp_params[ListenerParams::kNumListenerParameters] = {
@@ -141,6 +145,7 @@ FMOD_DSP_PARAMETER_DESC
 *soundfield_dsp_params[SoundfieldParams::kNumSoundfieldParameters] = {
     &soundfield_gain_param,
     &soundfield_3d_attributes_param,
+    &soundfield_overall_gain,
 };
 
 FMOD_DSP_PARAMETER_DESC
@@ -157,6 +162,7 @@ FMOD_DSP_PARAMETER_DESC
     &source_bypass_room_param,
     &source_enable_near_field_param,
     &source_near_field_gain_param,
+    &source_overall_gain,
 };
 
 FMOD_DSP_DESCRIPTION ListenerDesc = {
@@ -209,7 +215,7 @@ FMOD_DSP_DESCRIPTION SoundfieldDesc = {
     SoundfieldGetParamFloatCallback,  // DSP::getParameterFloat callback.
     nullptr,                          // DSP::getParameterInt callback.
     nullptr,                          // DSP::getParameterBool callback.
-    nullptr,                          // DSP::getParameterData callback.
+    SoundfieldGetParamDataCallback,   // DSP::getParameterData callback.
     nullptr,                          // DSP::shouldIProcess callback.
     nullptr,                          // Userdata.
     nullptr,                          // Called by System::loadPlugin.
@@ -238,7 +244,7 @@ FMOD_DSP_DESCRIPTION SourceDesc = {
     SourceGetParamFloatCallback,         // DSP::getParameterFloat callback.
     SourceGetParamIntCallback,           // DSP::getParameterInt callback.
     SourceGetParamBoolCallback,          // DSP::getParameterBool callback.
-    nullptr,                             // DSP::getParameterData callback.
+    SourceGetParamDataCallback,          // DSP::getParameterData callback.
     nullptr,                             // DSP::shouldIProcess callback.
     nullptr,                             // Userdata.
     nullptr,                             // Called by System::loadPlugin.
@@ -267,6 +273,9 @@ struct SoundfieldState {
 
   // Id number for a soundfield source.
   int soundfield_id;
+
+  // Overall gain value used for fmod
+  FMOD_DSP_PARAMETER_OVERALLGAIN overall_gain;
 };
 
 // Represents the current state of a sound object source.
@@ -312,6 +321,9 @@ struct SourceState {
 
   // Near field effects gain.
   float near_field_gain;
+
+  // Overall gain value with applied falloff model used for fmod
+  FMOD_DSP_PARAMETER_OVERALLGAIN overall_gain;
 };
 
 // Destroys the |ResonanceAudioSystem| instcorresponding to the given
@@ -391,18 +403,6 @@ float LinearFromDecibels(float decibels) {
                                         : std::pow(10.0f, decibels / 20.0f);
 }
 
-// Generates a mapping between the input to the occlusion effect and
-// approximately 0 to 10 on a logarithmic scale.
-float OcclusionCurve(float x) {
-  if (x < 0.0f) {
-    return 0.0f;
-  } else if (x <= 10.0f) {
-    return 0.55f + IntegerPow((x - 2.0f) / 8.0f, 10);
-  } else {
-    return 10.0f;
-  }
-}
-
 // Mixes |input| into |input_output|.
 //
 // @param input Buffer of input data.
@@ -432,6 +432,9 @@ void InitializeSoundfieldPluginParameters() {
   FMOD_DSP_INIT_PARAMDESC_DATA(soundfield_3d_attributes_param, "3D Attributes",
                                "", "",
                                FMOD_DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES);
+  FMOD_DSP_INIT_PARAMDESC_DATA(soundfield_overall_gain, "Overall Gain",
+                               "", "Overall Gain",
+                               FMOD_DSP_PARAMETER_DATA_TYPE_OVERALLGAIN);
 }
 
 // Initalizes the FMOD plugin parameters for the source plugin.
@@ -478,6 +481,9 @@ void InitializeSourcePluginParameters() {
   FMOD_DSP_INIT_PARAMDESC_FLOAT(source_near_field_gain_param, "Near-Field Gain",
                                "", "[0.0 to 9.0)] Default = 1.0", 0.0f, 9.0f,
                                1.00001f);
+  FMOD_DSP_INIT_PARAMDESC_DATA(source_overall_gain,
+      "Overall Gain", "", "Overall Gain",
+      FMOD_DSP_PARAMETER_DATA_TYPE_OVERALLGAIN);
 }
 
 }  // namespace
@@ -765,6 +771,24 @@ FMOD_RESULT F_CALLBACK SoundfieldGetParamFloatCallback(
   return FMOD_ERR_INVALID_PARAM;
 }
 
+FMOD_RESULT F_CALLBACK SoundfieldGetParamDataCallback(FMOD_DSP_STATE* dsp_state,
+    int index, void **value, unsigned int *length,
+    char* value_string) {
+    SoundfieldState* state =
+        reinterpret_cast<SoundfieldState*>(dsp_state->plugindata);
+    switch (index) {
+    case SoundfieldParams::kSoundfieldOverallGain:
+
+      state->overall_gain.linear_gain = 0.0f;
+      state->overall_gain.linear_gain_additive = LinearFromDecibels(state->gain);
+
+      *value = &state->overall_gain;
+      *length = sizeof(state->overall_gain);
+      return FMOD_OK;
+    }
+    return FMOD_ERR_INVALID_PARAM;
+}
+
 FMOD_RESULT F_CALLBACK SourceCreateCallback(FMOD_DSP_STATE* dsp_state) {
   auto* resonance_audio = GetSystem(dsp_state);
   dsp_state->plugindata = FMOD_DSP_ALLOC(dsp_state, sizeof(SourceState));
@@ -866,7 +890,7 @@ FMOD_RESULT F_CALLBACK SourceSetParamFloatCallback(FMOD_DSP_STATE* dsp_state,
                                   state->min_distance, state->max_distance,
                                   &distance_attenuation);
       resonance_audio->api->SetSourceDistanceAttenuation(
-          state->source_id, LinearFromDecibels(distance_attenuation));
+          state->source_id, distance_attenuation);
       // Updates distance model to ensure near field effects are only applied
       // when the minimum distance is below 1m. The +1.0f here ensures that max
       // distance is greater than min distance. For a min distance of zero,
@@ -881,12 +905,12 @@ FMOD_RESULT F_CALLBACK SourceSetParamFloatCallback(FMOD_DSP_STATE* dsp_state,
                                   state->min_distance, state->max_distance,
                                   &distance_attenuation);
       resonance_audio->api->SetSourceDistanceAttenuation(
-          state->source_id, LinearFromDecibels(distance_attenuation));
+          state->source_id, distance_attenuation);
       return FMOD_OK;
     case SourceParams::kOcclusionIntensity:
       state->occlusion = value;
       resonance_audio->api->SetSoundObjectOcclusionIntensity(
-          state->source_id, OcclusionCurve(value));
+          state->source_id, value);
       return FMOD_OK;
     case SourceParams::kDirectivityAlpha:
       state->directivity_alpha = value;
@@ -937,7 +961,7 @@ FMOD_RESULT F_CALLBACK SourceSetParamIntCallback(FMOD_DSP_STATE* dsp_state,
                                   state->min_distance, state->max_distance,
                                   &distance_attenuation);
       resonance_audio->api->SetSourceDistanceAttenuation(
-          state->source_id, LinearFromDecibels(distance_attenuation));
+          state->source_id, distance_attenuation);
       return FMOD_OK;
   }
   return FMOD_ERR_INVALID_PARAM;
@@ -1098,6 +1122,28 @@ FMOD_RESULT F_CALLBACK SourceGetParamBoolCallback(FMOD_DSP_STATE* dsp_state,
       return FMOD_OK;
   }
   return FMOD_ERR_INVALID_PARAM;
+}
+
+FMOD_RESULT F_CALLBACK SourceGetParamDataCallback(FMOD_DSP_STATE* dsp_state,
+    int index, void **value, unsigned int *length,
+    char* value_string) {
+    float distance_attenuation;
+    SourceState* state =
+        reinterpret_cast<SourceState*>(dsp_state->plugindata);
+    switch (index) {
+    case SourceParams::kSourceOverallGain:
+
+      FMOD_DSP_PAN_GETROLLOFFGAIN(dsp_state, state->model, state->distance,
+          state->min_distance, state->max_distance, &distance_attenuation);
+
+      state->overall_gain.linear_gain = 0.0f;
+      state->overall_gain.linear_gain_additive = distance_attenuation * LinearFromDecibels(state->gain);
+
+      *value = &state->overall_gain;
+      *length = sizeof(state->overall_gain);
+      return FMOD_OK;
+    }
+    return FMOD_ERR_INVALID_PARAM;
 }
 
 F_EXPORT FMOD_PLUGINLIST* F_CALL FMODGetPluginDescriptionList() {
