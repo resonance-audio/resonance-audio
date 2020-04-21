@@ -17,7 +17,7 @@ limitations under the License.
 #ifndef RESONANCE_AUDIO_PLATFORM_FMOD_FMOD_H_
 #define RESONANCE_AUDIO_PLATFORM_FMOD_FMOD_H_
 
-#include "api/lowlevel/inc/fmod.hpp"
+#include "api/core/inc/fmod.hpp"
 
 namespace vraudio {
 namespace fmod {
@@ -93,6 +93,11 @@ FMOD_RESULT F_CALLBACK SoundfieldSetParamDataCallback(FMOD_DSP_STATE* dsp_state,
 FMOD_RESULT F_CALLBACK SoundfieldGetParamFloatCallback(
     FMOD_DSP_STATE* dsp_state, int index, float* value, char* value_string);
 
+// Callback to be called on request for the soundfield plugin's data parameters.
+FMOD_RESULT F_CALLBACK SoundfieldGetParamDataCallback(
+    FMOD_DSP_STATE* dsp_state, int index, void **value,
+    unsigned int *length, char* value_string);
+
 // Source Callbacks.
 
 // Callback to be called on creation of a source plugin instance.
@@ -142,6 +147,11 @@ FMOD_RESULT F_CALLBACK SourceGetParamIntCallback(FMOD_DSP_STATE* dsp_state,
 // Callback to be called on request for the source plugin's bool parameters.
 FMOD_RESULT F_CALLBACK SourceGetParamBoolCallback(FMOD_DSP_STATE* dsp_state,
                                                   int index, FMOD_BOOL* value,
+                                                  char* value_string);
+
+// Callback to be called on request for the soundfield plugin's data parameters.
+FMOD_RESULT F_CALLBACK SourceGetParamDataCallback(FMOD_DSP_STATE* dsp_state,
+                                                  int index, void **value, unsigned int *length,
                                                   char* value_string);
 
 extern "C" {
