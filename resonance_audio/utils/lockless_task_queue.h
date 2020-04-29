@@ -51,6 +51,19 @@ class LocklessTaskQueue {
   void Clear();
 
  private:
+  struct tagged_ptr_atomic {
+    std::atomic<uint32_t> offset;
+    std::atomic<uint32_t> tag;
+  };
+
+  // Union for swap operations
+  union NodeAndTag {
+    std::atomic<uint64_t> both_atomic;
+    uint64_t both;
+    tagged_ptr_atomic single;
+    NodeAndTag() : single() {}
+  };
+
   // Node to model a single-linked list.
   struct Node {
     Node() = default;
@@ -69,31 +82,47 @@ class LocklessTaskQueue {
   //
   // @param list_head Pointer to list head.
   // @param node Node to be pushed to the front of the list.
-  void PushNodeToList(std::atomic<Node*>* list_head, Node* node);
+  void PushNodeToList(NodeAndTag* list_head, Node* node);
 
   // Pops a node from the front of a list.
   //
   // @param list_head Pointer to list head.
   // @return Front node, nullptr if list is empty.
-  Node* PopNodeFromList(std::atomic<Node*>* list_head);
+  Node* PopNodeFromList(NodeAndTag* list_head);
 
   // Iterates over list and moves all tasks to |temp_tasks_| to be executed in
   // FIFO order. All processed nodes are pushed back to the free list.
   //
   // @param list_head Head node of list to be processed.
   // @param execute If true, tasks on task list are executed.
-  void ProcessTaskList(Node* list_head, bool execute);
+  void ProcessTaskList(bool execute);
 
   // Initializes task queue structures and preallocates task queue nodes.
   //
   // @param num_nodes Number of nodes to be initialized on free list.
   void Init(size_t num_nodes);
 
+  // Conversion between 32 bit offset and pointers.
+  inline Node* ptr(const NodeAndTag *nt)
+  {
+    return (nt->single.offset == (uint32_t)-1) ? nullptr : (Node*)(nt->single.offset + base_);
+  }
+  inline uint32_t offset(const Node *node)
+  {
+    return node == nullptr ? (uint32_t)-1 : (uint32_t)((uintptr_t)node - base_);
+  }
+
   // Pointer to head node of free list.
-  std::atomic<Node*> free_list_head_;
+  NodeAndTag free_list_head_;
 
   // Pointer to head node of task list.
-  std::atomic<Node*> task_list_head_;
+  NodeAndTag task_list_head_;
+
+  // Base value for offset
+  uintptr_t base_;
+
+  // Tag value for compare and swap operations
+  std::atomic<uint32_t> tag_counter_;
 
   // Holds preallocated nodes.
   std::vector<Node> nodes_;

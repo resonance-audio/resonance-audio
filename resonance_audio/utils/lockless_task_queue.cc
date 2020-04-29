@@ -34,57 +34,67 @@ void LocklessTaskQueue::Post(Task&& task) {
     return;
   }
   free_node->task = std::move(task);
-  PushNodeToList(&task_list_head_, free_node);
+  PushNodeToList((NodeAndTag*)&task_list_head_, free_node);
 }
 
 void LocklessTaskQueue::Execute() {
-  Node* const old_task_list_head_ptr = task_list_head_.exchange(nullptr);
-  ProcessTaskList(old_task_list_head_ptr, true /*execute_tasks*/);
+  ProcessTaskList(true /*execute_tasks*/);
 }
 
 void LocklessTaskQueue::Clear() {
-  Node* const old_task_list_head_ptr = task_list_head_.exchange(nullptr);
-  ProcessTaskList(old_task_list_head_ptr, false /*execute_tasks*/);
+  ProcessTaskList(false /*execute_tasks*/);
 }
 
-void LocklessTaskQueue::PushNodeToList(std::atomic<Node*>* list_head,
-                                       Node* node) {
+void LocklessTaskQueue::PushNodeToList(NodeAndTag* list_head,
+  Node* node) {
   DCHECK(list_head);
   DCHECK(node);
-  Node* list_head_ptr;
+  NodeAndTag nodeSwap;
+  nodeSwap.single.offset = offset(node);
+  NodeAndTag list_head_compare;
+  uint32_t tag = tag_counter_.fetch_add(1);
+  list_head_compare.single.tag = tag;
   do {
-    list_head_ptr = list_head->load();
-    node->next = list_head_ptr;
-  } while (!std::atomic_compare_exchange_strong_explicit(
-      list_head, &list_head_ptr, node, std::memory_order_release,
-      std::memory_order_relaxed));
+    list_head_compare.single.offset = list_head->single.offset.load(std::memory_order_relaxed);
+    list_head->single.tag.store(tag, std::memory_order_relaxed);
+    node->next.store(ptr(&list_head_compare), std::memory_order_relaxed);
+  } while (!list_head->both_atomic.compare_exchange_strong(list_head_compare.both, nodeSwap.both,
+    std::memory_order_release, std::memory_order_acquire));
 }
 
 LocklessTaskQueue::Node* LocklessTaskQueue::PopNodeFromList(
-    std::atomic<Node*>* list_head) {
+  NodeAndTag* list_head) {
   DCHECK(list_head);
-  Node* list_head_ptr;
-  Node* list_head_next_ptr;
+  NodeAndTag list_head_compare;
+  NodeAndTag list_head_swap;
+  uint32_t tag = tag_counter_.fetch_add(1);
+  list_head_compare.single.tag = tag;
   do {
-    list_head_ptr = list_head->load();
-    if (list_head_ptr == nullptr) {
+    list_head_compare.single.offset = list_head->single.offset.load(std::memory_order_relaxed);
+    if (list_head_compare.single.offset == (uint32_t)-1) {
       // End of list reached.
       return nullptr;
     }
-    list_head_next_ptr = list_head_ptr->next.load();
-  } while (!std::atomic_compare_exchange_strong_explicit(
-      list_head, &list_head_ptr, list_head_next_ptr, std::memory_order_relaxed,
-      std::memory_order_relaxed));
-  return list_head_ptr;
+    list_head->single.tag.store(tag, std::memory_order_relaxed);
+    list_head_swap.single.offset = offset(ptr(&list_head_compare)->next);
+  } while (!list_head->both_atomic.compare_exchange_strong(list_head_compare.both, list_head_swap.both, std::memory_order_acquire,
+    std::memory_order_relaxed));
+  return ptr(&list_head_compare);
 }
 
-void LocklessTaskQueue::ProcessTaskList(Node* list_head, bool execute) {
-  Node* node_itr = list_head;
+void LocklessTaskQueue::ProcessTaskList(bool execute) {
+  NodeAndTag nullNodeAndTag;
+  nullNodeAndTag.single.offset = (uint32_t)-1;
+  nullNodeAndTag.single.tag = (uint32_t)-1;
+  NodeAndTag old_task_list_head;
+  old_task_list_head.both = task_list_head_.both_atomic.exchange(nullNodeAndTag.both);
+
+  Node* node_itr = ptr(&old_task_list_head);
   while (node_itr != nullptr) {
     Node* next_node_ptr = node_itr->next;
     temp_tasks_.emplace_back(std::move(node_itr->task));
     node_itr->task = nullptr;
-    PushNodeToList(&free_list_head_, node_itr);
+    PushNodeToList((NodeAndTag*)&free_list_head_, node_itr);
     node_itr = next_node_ptr;
   }
 
@@ -103,16 +113,18 @@ void LocklessTaskQueue::ProcessTaskList(Node* list_head, bool execute) {
 void LocklessTaskQueue::Init(size_t num_nodes) {
   nodes_.resize(num_nodes);
   temp_tasks_.reserve(num_nodes);
+  tag_counter_.store(0);
 
   // Initialize free list.
-  free_list_head_ = &nodes_[0];
+  base_ = (uintptr_t)&nodes_[0];
+  free_list_head_.single.offset = 0;
   for (size_t i = 0; i < num_nodes - 1; ++i) {
     nodes_[i].next = &nodes_[i + 1];
   }
   nodes_[num_nodes - 1].next = nullptr;
 
   // Initialize task list.
-  task_list_head_ = nullptr;
+  task_list_head_.single.offset = (uint32_t)-1;
 }
 
 }  // namespace vraudio
