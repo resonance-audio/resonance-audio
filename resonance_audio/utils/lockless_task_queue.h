@@ -17,16 +17,15 @@ limitations under the License.
 #ifndef RESONANCE_AUDIO_UTILS_LOCKLESS_TASK_QUEUE_H_
 #define RESONANCE_AUDIO_UTILS_LOCKLESS_TASK_QUEUE_H_
 
-#include <stddef.h>
-
 #include <atomic>
+#include <cstdint>
 #include <functional>
 #include <vector>
 
 namespace vraudio {
 
-// Lock-less task queue which is thread safe for cocurrent task producers and a
-// single task executor thread.
+// Lock-less task queue which is thread safe for concurrent task producers and
+// single task consumers.
 class LocklessTaskQueue {
  public:
   // Alias for the task closure type.
@@ -51,6 +50,13 @@ class LocklessTaskQueue {
   void Clear();
 
  private:
+  // To prevent ABA problems during thread synchronization, the most significant
+  // 32 bits of this index type are reserved for a continuously increasing
+  // tag counter. This prevents cases where nodes on the head appears to be
+  // untouched during the preparation of a push operation but instead they have
+  // been popped and pushed back during a context switch.
+  typedef uint64_t TagAndIndex;
+
   // Node to model a single-linked list.
   struct Node {
     Node() = default;
@@ -61,39 +67,48 @@ class LocklessTaskQueue {
     // User task.
     LocklessTaskQueue::Task task;
 
-    // Pointer to next node.
-    std::atomic<Node*> next;
+    // Index to next node.
+    std::atomic<TagAndIndex> next;
   };
+
+  // Returned a TagAndIndex with increased tag.
+  TagAndIndex IncreaseTag(TagAndIndex tag_and_index);
+
+  // Extracts the index in the least significant 32 bits from a TagAndIndex.
+  TagAndIndex GetIndex(TagAndIndex tag_and_index);
+
+  // Extracts the flag in the most significant 32 bits from a TagAndIndex.
+  TagAndIndex GetFlag(TagAndIndex tag_and_index);
 
   // Pushes a node to the front of a list.
   //
-  // @param list_head Pointer to list head.
-  // @param node Node to be pushed to the front of the list.
-  void PushNodeToList(std::atomic<Node*>* list_head, Node* node);
+  // @param list_head Index to list head.
+  // @param node Index of node to be pushed to the front of the list.
+  void PushNodeToList(std::atomic<TagAndIndex>* list_head, TagAndIndex node);
 
   // Pops a node from the front of a list.
   //
-  // @param list_head Pointer to list head.
-  // @return Front node, nullptr if list is empty.
-  Node* PopNodeFromList(std::atomic<Node*>* list_head);
+  // @param list_head Index to list head.
+  // @return Index of front node, kInvalidIndex if list is empty.
+  TagAndIndex PopNodeFromList(std::atomic<TagAndIndex>* list_head);
 
   // Iterates over list and moves all tasks to |temp_tasks_| to be executed in
   // FIFO order. All processed nodes are pushed back to the free list.
   //
-  // @param list_head Head node of list to be processed.
+  // @param list_head Index of head node of list to be processed.
   // @param execute If true, tasks on task list are executed.
-  void ProcessTaskList(Node* list_head, bool execute);
+  void ProcessTaskList(TagAndIndex list_head, bool execute);
 
   // Initializes task queue structures and preallocates task queue nodes.
   //
   // @param num_nodes Number of nodes to be initialized on free list.
   void Init(size_t num_nodes);
 
-  // Pointer to head node of free list.
-  std::atomic<Node*> free_list_head_;
+  // Index to head node of free list.
+  std::atomic<TagAndIndex> free_list_head_idx_;
 
-  // Pointer to head node of task list.
-  std::atomic<Node*> task_list_head_;
+  // Index to head node of task list.
+  std::atomic<TagAndIndex> task_list_head_idx_;
 
   // Holds preallocated nodes.
   std::vector<Node> nodes_;
