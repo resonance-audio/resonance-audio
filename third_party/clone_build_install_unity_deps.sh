@@ -45,15 +45,6 @@ git_clone_if_not_exist () {
   fi
 }
 
-hg_clone_if_not_exist () {
-  TARGET_PATH=$1
-  URL=$2
-  BRANCH=$3
-  if [[ ! -d "$TARGET_PATH" ]] ; then
-    hg clone "$URL" -r "${BRANCH}" "$TARGET_PATH"
-  fi
-}
-
 compile_embree_ogg_vorbis () {
   MAKE_GENERATOR=$1
   BUILD_PATH=$2
@@ -99,7 +90,7 @@ cd "${SCRIPT_DIR}"
 git_clone_if_not_exist "embree" "https://github.com/embree/embree.git" "v2.16.5" "libembree.patch"
 git_clone_if_not_exist "ogg" "https://github.com/xiph/ogg.git" "master" "libogg.patch"
 git_clone_if_not_exist "vorbis" "https://github.com/xiph/vorbis" "master" "libvorbis.patch"
-hg_clone_if_not_exist "nativeaudioplugins" "https://bitbucket.org/Unity-Technologies/nativeaudioplugins" "default"
+git_clone_if_not_exist "nativeaudioplugins" "https://github.com/Unity-Technologies/NativeAudioPlugins.git" "master"
 
 case "$(uname -s)" in
   Darwin)

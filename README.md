@@ -32,7 +32,6 @@ SDKs:
 
 -   [CMake](https://cmake.org/download/)
 -   [Git (with Git-Bash on Windows)](https://git-scm.com/downloads)
--   [Mercurial](https://www.mercurial-scm.org/downloads)
 
 _Note: For Windows builds, [Visual Studio
 2015](https://www.visualstudio.com/vs/older-downloads/) is recommended._
