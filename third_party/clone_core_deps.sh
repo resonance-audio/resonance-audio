@@ -26,25 +26,11 @@ git_clone_if_not_exist () {
   fi
 }
 
-hg_clone_if_not_exist () {
-  FOLDER=$1
-  URL=$2
-  BRANCH=$3
-  if [[ ! -d "$FOLDER" ]] ; then
-    hg clone "$URL" -r "${BRANCH}" "$FOLDER"
-  fi
-}
-
 cd "${SCRIPT_DIR}"
 # Clone Eigen
-hg_clone_if_not_exist "eigen" "https://bitbucket.org/eigen/eigen" "default"
-# Clone PFFFT & apply Android patch
-hg_clone_if_not_exist "pffft" "https://bitbucket.org/jpommier/pffft" "default"
-if [[ -d "${SCRIPT_DIR}/pffft" ]] ; then
-  cd "${SCRIPT_DIR}/pffft"
-  curl https://bitbucket.org/h6a_h4i/pffft/commits/a8db21478324892d41653c9da12aed067b0caabf/raw | patch -p1
-  cd "${SCRIPT_DIR}"
-fi
+git_clone_if_not_exist "eigen" "https://gitlab.com/libeigen/eigen.git" "master"
+# Clone PFFFT
+git_clone_if_not_exist "pffft" "https://bitbucket.org/jpommier/pffft.git" "master"
 
 # Install google test
 git_clone_if_not_exist "googletest" "https://github.com/google/googletest.git" "master"
