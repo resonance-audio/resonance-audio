@@ -55,7 +55,7 @@ To clone the dependencies into the repository, run:
 _Note: These dependencies do *not* need to be built, since their source code is
 directly pulled in from the build scripts._
 
-#### [Unity](https://unity3d.com/) Platform Dependencies ([nativeaudioplugins](https://bitbucket.org/Unity-Technologies/nativeaudioplugins), [embree](https://github.com/embree/embree), [ogg](https://github.com/xiph/ogg), [vorbis](https://github.com/xiph/vorbis))
+#### [Unity](https://unity3d.com/) Platform Dependencies ([nativeaudioplugins](https://github.com/Unity-Technologies/NativeAudioPlugins), [embree](https://github.com/embree/embree), [ogg](https://github.com/xiph/ogg), [vorbis](https://github.com/xiph/vorbis))
 
 The Unity plugin integrates additional tools to estimate reverberation from game
 geometry and to capture Ambisonic soundfields from a game scene. These features
