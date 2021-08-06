@@ -17,7 +17,8 @@ limitations under the License.
 #ifndef RESONANCE_AUDIO_PLATFORM_FMOD_FMOD_H_
 #define RESONANCE_AUDIO_PLATFORM_FMOD_FMOD_H_
 
-#include "api/core/inc/fmod.hpp"
+#include "api/core/inc/fmod_common.h"
+#include "api/core/inc/fmod_dsp.h"
 
 namespace vraudio {
 namespace fmod {
