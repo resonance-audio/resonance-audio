@@ -18,6 +18,7 @@ limitations under the License.
 #define RESONANCE_AUDIO_UTILS_LOCKLESS_TASK_QUEUE_H_
 
 #include <atomic>
+#include <cstddef>
 #include <cstdint>
 #include <functional>
 #include <vector>
