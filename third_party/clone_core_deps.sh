@@ -33,7 +33,7 @@ git_clone_if_not_exist "eigen" "https://gitlab.com/libeigen/eigen.git" "master"
 git_clone_if_not_exist "pffft" "https://bitbucket.org/jpommier/pffft.git" "master"
 
 # Install google test
-git_clone_if_not_exist "googletest" "https://github.com/google/googletest.git" "master"
+git_clone_if_not_exist "googletest" "https://github.com/google/googletest.git" "main"
 
 # Install CMake Android/iOS toolchain support (optional for Android/iOS builds)
 git_clone_if_not_exist "android-cmake" "https://github.com/taka-no-me/android-cmake.git" "master"
