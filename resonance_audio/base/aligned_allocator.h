@@ -72,9 +72,9 @@ void AllignedFree(PointerType mem_block_aligned) {
 template <typename Type, size_t Alignment>
 class AlignedAllocator : public std::allocator<Type> {
  public:
-  typedef typename std::allocator<Type>::pointer Pointer;
-  typedef typename std::allocator<Type>::const_pointer ConstPointer;
-  typedef typename std::allocator<Type>::size_type SizeType;
+  using Pointer = typename std::allocator_traits<std::allocator<Type>>::pointer;
+  using ConstPointer = typename std::allocator_traits<std::allocator<Type>>::const_pointer;
+  using SizeType = typename std::allocator_traits<std::allocator<Type>>::size_type;
 
   AlignedAllocator() { StaticAlignmentCheck<sizeof(Type), Alignment>(); }
 
