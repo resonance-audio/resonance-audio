@@ -13,6 +13,20 @@
 # limitations under the License.
 #
 
+if (${CMAKE_VERSION} VERSION_GREATER "3.9.4")
+    cmake_policy(SET CMP0069 NEW)
+endif ()
+if (IOS_DETECTED)
+    set(LIB_BUILD_TYPE STATIC)
+    if (SIMULATOR_DETECTED)
+        set(CMAKE_OSX_ARCHITECTURES x86_64 arm64)
+    endif (SIMULATOR_DETECTED)
+else ()
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.7")
+    set(CMAKE_OSX_ARCHITECTURES x86_64 arm64)
+    set(LIB_BUILD_TYPE SHARED)
+endif ()
+
 if (WIN32)
     set(FMOD_SDK_DIR "C:/Program\ Files\ (x86)/FMOD\ SoundSystem/FMOD\ Studio\ API\ Windows" CACHE PATH "Path to FMOD SDK")
 elseif (APPLE)
@@ -32,9 +46,20 @@ add_library(resonanceaudio SHARED ${RESONANCE_AUDIO_FMOD_PLUGIN_SOURCES} $<TARGE
         $<TARGET_OBJECTS:PffftObj>)
 target_include_directories(resonanceaudio PRIVATE ${FMOD_SDK_DIR})
 target_include_directories(resonanceaudio PRIVATE ${RA_SOURCE_DIR})
+
+if (${CMAKE_VERSION} VERSION_GREATER "3.9.4")
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT supported OUTPUT error)
+    if (supported)
+        set_property(TARGET resonanceaudio PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+    endif()
+endif()
+
 if (MSVC)
-    target_sources(resonanceaudio PUBLIC ${RA_FMOD_SOURCE_DIR}/fmod_win.def)
-endif (MSVC)
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /DEBUG:FULL /OPT:REF")
+elseif (ANDROID)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -fno-exceptions")
+endif ()
 
 set(FMOD_INSTALL_DIR "${INSTALL_DIR}/fmod/")
 set(INSTALL_BIN_DIR "")
@@ -47,30 +72,42 @@ if (MSVC)
 elseif (ANDROID)
     if ("${ANDROID_ABI}" MATCHES "armeabi-v7a")
         set(INSTALL_BIN_DIR "Plugins/Android/armeabi-v7a")
+    elseif ("${ANDROID_ABI}" MATCHES "x86_64")
+        set(INSTALL_BIN_DIR "Plugins/Android/x86_64")
     elseif ("${ANDROID_ABI}" MATCHES "x86")
         set(INSTALL_BIN_DIR "Plugins/Android/x86")
     elseif ("${ANDROID_ABI}" MATCHES "arm64-v8a")
         set(INSTALL_BIN_DIR "Plugins/Android/arm64-v8a")
-    elseif ("${ANDROID_ABI}" MATCHES "x86_64")
-        set(INSTALL_BIN_DIR "Plugins/Android/x86_64")
+    endif ()
+    if (CMAKE_BUILD_TYPE STREQUAL Release)
+        add_custom_command(TARGET resonanceaudio POST_BUILD COMMAND ${CMAKE_STRIP} -x $<TARGET_FILE:resonanceaudio>)
     endif ()
 elseif (APPLE)
+    set_target_properties(resonanceaudio PROPERTIES COMPILE_FLAGS -funroll-loops)
     if (IOS_DETECTED)
         set(INSTALL_BIN_DIR "Plugins/iOS")
     else ()
+    	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
         set(INSTALL_BIN_DIR "Plugins/Mac")
         set_target_properties(resonanceaudio PROPERTIES
                 PREFIX ""
                 )
+    endif ()
+
+    if (CMAKE_BUILD_TYPE STREQUAL Release)
+        add_custom_command(TARGET resonanceaudio POST_BUILD COMMAND ${CMAKE_STRIP} -x $<TARGET_FILE:resonanceaudio>)
     endif ()
 elseif (UNIX)
     set(INSTALL_BIN_DIR "Plugins/Linux")
 endif ()
 
 install(TARGETS resonanceaudio
-        LIBRARY DESTINATION "${FMOD_INSTALL_DIR}/${INSTALL_BIN_DIR}"
-        ARCHIVE DESTINATION "${FMOD_INSTALL_DIR}/${INSTALL_BIN_DIR}"
-        RUNTIME DESTINATION "${FMOD_INSTALL_DIR}/${INSTALL_BIN_DIR}")
-install(DIRECTORY ${RA_FMOD_SOURCE_DIR}/UnityIntegration DESTINATION ${FMOD_INSTALL_DIR})
+    LIBRARY DESTINATION "${FMOD_INSTALL_DIR}/${INSTALL_BIN_DIR}"
+    ARCHIVE DESTINATION "${FMOD_INSTALL_DIR}/${INSTALL_BIN_DIR}"
+    RUNTIME DESTINATION "${FMOD_INSTALL_DIR}/${INSTALL_BIN_DIR}")
 install(FILES "${PROJECT_SOURCE_DIR}/platforms/common/room_properties.h"
         DESTINATION "${FMOD_INSTALL_DIR}/Plugins/include/")
+if (MSVC)
+    install(FILES $<TARGET_PDB_FILE:resonanceaudio>
+            DESTINATION "${FMOD_INSTALL_DIR}/${INSTALL_BIN_DIR}")
+endif ()

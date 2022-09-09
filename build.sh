@@ -25,9 +25,14 @@ VERBOSE_MAKE=""
 declare -a BUILD_FLAGS
 declare -a CONFIG_FLAGS
 
-ANDROID_NDK="~/android-ndk-r15c/"
+ANDROID_NDK="$ANDROID_SDK_ROOT/ndk/21.3.6528147/"
 ANDROID_NATIVE_API_LEVEL="21"
 ANDROID_ABI="armeabi-v7a with NEON"
+ANDROID_SELECT_ENABLED=0
+case "$(uname -s)" in
+  Linux*) ANDROID_TOOLCHAIN_HOST="linux-x86_64";;
+  CYGWIN*|MINGW*|MSYS*) ANDROID_TOOLCHAIN_HOST="windows-x86_64"
+esac
 
 MSVC_GENERATOR="Visual Studio 14 2015 Win64"
 
@@ -50,11 +55,13 @@ Please select a build target:
   -p= | --profile=[Debug|Release], default: Release
 
   --verbose_make             # Enables verbose make/build output.
-  --android_toolchain        # Use Android NDK toolchain (may need adjustments to ANDROID_NDK,
-                             # ANDROID_NATIVE_API_LEVEL, ANDROID_ABI script variables).
+  --android_toolchain |      # Use Android NDK toolchain (may need adjustments to ANDROID_NDK,
+  --android_toolchain=[ABI]  # ANDROID_NATIVE_API_LEVEL, ANDROID_ABI script variables).
+                             # ABI options=[armeabi-v7a|arm64-v8a|x86|x86_64]
   --ios_os_toolchain         # Use iOS ARM toolchain.
   --ios_simulator_toolchain  # Use iOS X86 simulator toolchain.
   --msvc_dynamic_runtime     # Enables dynamic runtime environment linking in MSVC builds.
+  --msvc_x86                 # Build Windows x86 32 bit
 EOF
 exit
 }
@@ -79,28 +86,62 @@ do
       shift # past argument with no value
       ;;
 
-    --android_toolchain)
-      CONFIG_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE=./third_party/android-cmake/android.toolchain.cmake)
+    --android_toolchain=*)
+      ANDROID_ABI="${i#*=}"
+      if [ $ANDROID_ABI == "armv7-a" ]
+      then
+        CONFIG_FLAGS+=(-DANDROID_ABI="armeabi-v7a with NEON")
+      else
+        CONFIG_FLAGS+=(-DANDROID_ABI="${ANDROID_ABI}")
+      fi
+      ANDROID_SELECT_ENABLED=1
+      CONFIG_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
       CONFIG_FLAGS+=(-DANDROID_NDK="${ANDROID_NDK}")
       CONFIG_FLAGS+=(-DANDROID_NATIVE_API_LEVEL="${ANDROID_NATIVE_API_LEVEL}")
+      CONFIG_FLAGS+=(-DCMAKE_ANDROID_API_MIN="${ANDROID_NATIVE_API_LEVEL}")
+      CONFIG_FLAGS+=(-DANDROID_STL="c++_shared")
+      CONFIG_FLAGS+=(-DANDROID_STL_FORCE_FEATURES="OFF")
+      CONFIG_FLAGS+=(-DANDROID_ARM_MODE="arm")
+      CONFIG_FLAGS+=(-DCMAKE_MAKE_PROGRAM=$ANDROID_SDK_ROOT/cmake/3.18.1/bin/ninja)
+      CONFIG_FLAGS+=(-DCMAKE_STRIP=${ANDROID_NDK}/toolchains/llvm/prebuilt/$ANDROID_TOOLCHAIN_HOST/bin/llvm-strip)
+      shift # past argument with no value
+      ;;
+
+    --android_toolchain)
+      ANDROID_SELECT_ENABLED=1
+      CONFIG_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
+      CONFIG_FLAGS+=(-DANDROID_NDK="${ANDROID_NDK}")
+      CONFIG_FLAGS+=(-DANDROID_NATIVE_API_LEVEL="${ANDROID_NATIVE_API_LEVEL}")
+      CONFIG_FLAGS+=(-DCMAKE_ANDROID_API_MIN="${ANDROID_NATIVE_API_LEVEL}")
       CONFIG_FLAGS+=(-DANDROID_ABI="${ANDROID_ABI}")
+      CONFIG_FLAGS+=(-DANDROID_STL="c++_shared")
+      CONFIG_FLAGS+=(-DANDROID_STL_FORCE_FEATURES="OFF")
+      CONFIG_FLAGS+=(-DANDROID_ARM_MODE="arm")
+      CONFIG_FLAGS+=(-DCMAKE_MAKE_PROGRAM=$ANDROID_SDK_ROOT/cmake/3.18.1/bin/ninja)
       shift # past argument with no value
       ;;
 
     --ios_os_toolchain)
       CONFIG_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE=./third_party/ios-cmake/ios.toolchain.cmake)
-      CONFIG_FLAGS+=(-DIOS_PLATFORM=OS)
+      CONFIG_FLAGS+=(-DPLATFORM=OS)
+      CONFIG_FLAGS+=(-DDEPLOYMENT_TARGET=9.0)
       shift # past argument with no value
       ;;
 
     --ios_simulator_toolchain)
       CONFIG_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE=./third_party/ios-cmake/ios.toolchain.cmake)
-      CONFIG_FLAGS+=(-DIOS_PLATFORM=SIMULATOR64)
+      CONFIG_FLAGS+=(-DPLATFORM=SIMULATOR64)
+      CONFIG_FLAGS+=(-DDEPLOYMENT_TARGET=9.0)
       shift # past argument with no value
       ;;
 
     --msvc_dynamic_runtime)
       CONFIG_FLAGS+=(-DSTATIC_MSVC_RUNTIME:BOOL=OFF)
+      shift # past argument with no value
+      ;;
+
+    --msvc_x86)
+      MSVC_GENERATOR="Visual Studio 14 2015"
       shift # past argument with no value
       ;;
 
@@ -124,19 +165,36 @@ case "$(uname -s)" in
   Darwin)
     BUILD_FLAGS+=(-j "${NUM_CORES}")
     cmake -DBUILD_"${BUILD_TARGET}":BOOL=ON\
+      -DCMAKE_BUILD_TYPE=Release\
       "${CONFIG_FLAGS[@]}" "$@" ..
     ;;
 
   Linux)
-    BUILD_FLAGS+=(-j "${NUM_CORES}")
-    cmake -DBUILD_"${BUILD_TARGET}":BOOL=ON\
-      "${CONFIG_FLAGS[@]}" "$@" ..
+    if [ $ANDROID_SELECT_ENABLED == 0 ]
+    then
+      BUILD_FLAGS+=(-j "${NUM_CORES}")
+      cmake -DBUILD_"${BUILD_TARGET}":BOOL=ON\
+        "${CONFIG_FLAGS[@]}" "$@" ..
+    else
+      cmake -G"Ninja"\
+        -DBUILD_"${BUILD_TARGET}":BOOL=ON\
+        -DCMAKE_BUILD_TYPE=Release\
+        "${CONFIG_FLAGS[@]}" "$@" ..
+    fi
     ;;
 
   CYGWIN*|MINGW*|MSYS*)
-    cmake -G"${MSVC_GENERATOR}"\
-      -DBUILD_"${BUILD_TARGET}":BOOL=ON\
-      "${CONFIG_FLAGS[@]}" "$@" ..
+    if [ $ANDROID_SELECT_ENABLED == 0 ]
+    then
+      cmake -G"${MSVC_GENERATOR}"\
+        -DBUILD_"${BUILD_TARGET}":BOOL=ON\
+        "${CONFIG_FLAGS[@]}" "$@" ..
+    else
+      cmake -G"Ninja"\
+        -DBUILD_"${BUILD_TARGET}":BOOL=ON\
+        -DCMAKE_BUILD_TYPE=Release\
+        "${CONFIG_FLAGS[@]}" "$@" ..
+    fi
     ;;
 
   *)
