@@ -74,13 +74,6 @@ struct ResonanceAudioSystem {
 static ResonanceAudioSystem* resonance_audio_systems[kMaxNumSystemInstances] = {
     nullptr};
 
-// Piecewise linear mapping for minimum and maximum distance values.
-// Note these arrays are static for FMOD_DSP_INIT_PARAMDESC_FLOAT_WITH_MAPPING.
-static float distance_mapping_values[] = {0.0f,   1.0f,    5.0f,    10.0f,
-                                          100.0f, 1000.0f, 10000.0f};
-static float distance_mapping_scale[] = {0.0f,  2.0f,  5.0f, 10.0f,
-                                         15.0f, 20.0f, 27.0f};
-
 // Listener plugin parameters.
 enum ListenerParams {
   kGlobalGain = 0,
@@ -100,12 +93,11 @@ enum SoundfieldParams {
 enum SourceParams {
   kGain = 0,
   kSpread,
-  kDistanceMin,
-  kDistanceMax,
   kDistanceModel,
   kOcclusionIntensity,
   kDirectivityAlpha,
   kDirectivityOrder,
+  kAttenuationRange,
   kAttributes3D,
   kBypassRoom,
   kEnableNearField,
@@ -123,12 +115,11 @@ static FMOD_DSP_PARAMETER_DESC soundfield_overall_gain;
 
 static FMOD_DSP_PARAMETER_DESC source_gain_param;
 static FMOD_DSP_PARAMETER_DESC source_spread_param;
-static FMOD_DSP_PARAMETER_DESC source_distance_min_param;
-static FMOD_DSP_PARAMETER_DESC source_distance_max_param;
 static FMOD_DSP_PARAMETER_DESC source_distance_model_param;
 static FMOD_DSP_PARAMETER_DESC source_occlusion_intensity_param;
 static FMOD_DSP_PARAMETER_DESC source_directivity_alpha_param;
 static FMOD_DSP_PARAMETER_DESC source_directivity_order_param;
+static FMOD_DSP_PARAMETER_DESC source_attenuation_range_param;
 static FMOD_DSP_PARAMETER_DESC source_3d_attributes_param;
 static FMOD_DSP_PARAMETER_DESC source_bypass_room_param;
 static FMOD_DSP_PARAMETER_DESC source_enable_near_field_param;
@@ -152,12 +143,11 @@ FMOD_DSP_PARAMETER_DESC
 *source_dsp_params[SourceParams::kNumSourceParameters] = {
     &source_gain_param,
     &source_spread_param,
-    &source_distance_min_param,
-    &source_distance_max_param,
     &source_distance_model_param,
     &source_occlusion_intensity_param,
     &source_directivity_alpha_param,
     &source_directivity_order_param,
+    &source_attenuation_range_param,
     &source_3d_attributes_param,
     &source_bypass_room_param,
     &source_enable_near_field_param,
@@ -445,14 +435,6 @@ void InitializeSourcePluginParameters() {
   FMOD_DSP_INIT_PARAMDESC_FLOAT(source_spread_param, "Spread", "Deg",
                                 "Spread in degrees. Default 0.0", 0.0f, 360.0f,
                                 0.00001f);
-  FMOD_DSP_INIT_PARAMDESC_FLOAT_WITH_MAPPING(
-      source_distance_min_param, "Min Distance", "m",
-      "[0.0 to 10000.0] Default = 1.0", 1.0f, distance_mapping_values,
-      distance_mapping_scale);
-  FMOD_DSP_INIT_PARAMDESC_FLOAT_WITH_MAPPING(
-      source_distance_max_param, "Max Distance", "m",
-      "[0.0 to 10000.0] Default = 500.0", 500.0f, distance_mapping_values,
-      distance_mapping_scale);
   FMOD_DSP_INIT_PARAMDESC_INT(
       source_distance_model_param, "Dist Rolloff", "",
       "LINEAR, LOGARITHMIC, NONE, LINEAR SQUARED, LOGARITHMIC TAPERED. Default "
@@ -470,6 +452,8 @@ void InitializeSourcePluginParameters() {
   FMOD_DSP_INIT_PARAMDESC_FLOAT(source_directivity_order_param, "Dir Sharpness",
                                 "", "[1.0 to 10.0)] Default = 1.0", 1.0f, 10.0f,
                                 1.00001f);
+  FMOD_DSP_INIT_PARAMDESC_DATA(source_attenuation_range_param, "Attenuation Range", "",
+                               "", FMOD_DSP_PARAMETER_DATA_TYPE_ATTENUATION_RANGE);
   FMOD_DSP_INIT_PARAMDESC_DATA(source_3d_attributes_param, "3D Attributes", "",
                                "", FMOD_DSP_PARAMETER_DATA_TYPE_3DATTRIBUTES);
   FMOD_DSP_INIT_PARAMDESC_BOOL(source_bypass_room_param, "Bypass Room", "",
@@ -871,7 +855,6 @@ FMOD_RESULT F_CALLBACK SourceProcessCallback(
 
 FMOD_RESULT F_CALLBACK SourceSetParamFloatCallback(FMOD_DSP_STATE* dsp_state,
                                                    int index, float value) {
-  float distance_attenuation;
   auto* resonance_audio = GetSystem(dsp_state);
   SourceState* state = reinterpret_cast<SourceState*>(dsp_state->plugindata);
   switch (index) {
@@ -883,29 +866,6 @@ FMOD_RESULT F_CALLBACK SourceSetParamFloatCallback(FMOD_DSP_STATE* dsp_state,
     case SourceParams::kSpread:
       state->spread = value;
       resonance_audio->api->SetSoundObjectSpread(state->source_id, value);
-      return FMOD_OK;
-    case SourceParams::kDistanceMin:
-      state->min_distance = value;
-      FMOD_DSP_PAN_GETROLLOFFGAIN(dsp_state, state->model, state->distance,
-                                  state->min_distance, state->max_distance,
-                                  &distance_attenuation);
-      resonance_audio->api->SetSourceDistanceAttenuation(
-          state->source_id, distance_attenuation);
-      // Updates distance model to ensure near field effects are only applied
-      // when the minimum distance is below 1m. The +1.0f here ensures that max
-      // distance is greater than min distance. For a min distance of zero,
-      // near field effect will be fully on when the source distance is 0.1.
-      resonance_audio->api->SetSourceDistanceModel(
-          state->source_id, DistanceRolloffModel::kNone, state->min_distance,
-          state->min_distance + 1.0f);
-      return FMOD_OK;
-    case SourceParams::kDistanceMax:
-      state->max_distance = value;
-      FMOD_DSP_PAN_GETROLLOFFGAIN(dsp_state, state->model, state->distance,
-                                  state->min_distance, state->max_distance,
-                                  &distance_attenuation);
-      resonance_audio->api->SetSourceDistanceAttenuation(
-          state->source_id, distance_attenuation);
       return FMOD_OK;
     case SourceParams::kOcclusionIntensity:
       state->occlusion = value;
@@ -992,6 +952,31 @@ FMOD_RESULT F_CALLBACK SourceSetParamDataCallback(FMOD_DSP_STATE* dsp_state,
   SourceState* state = reinterpret_cast<SourceState*>(dsp_state->plugindata);
 
   switch (index) {
+    case SourceParams::kAttenuationRange:
+    {
+        FMOD_DSP_PARAMETER_ATTENUATION_RANGE* param =
+            reinterpret_cast<FMOD_DSP_PARAMETER_ATTENUATION_RANGE*>(data);
+        if (state->min_distance == param->min && state->max_distance == param->max)
+        {
+            return FMOD_OK;
+        }
+        float distance_attenuation;
+        state->min_distance = param->min;
+        state->max_distance = param->max;
+        FMOD_DSP_PAN_GETROLLOFFGAIN(dsp_state, state->model, state->distance,
+            state->min_distance, state->max_distance,
+            &distance_attenuation);
+        resonance_audio->api->SetSourceDistanceAttenuation(
+            state->source_id, distance_attenuation);
+        // Updates distance model to ensure near field effects are only applied
+        // when the minimum distance is below 1m. The +1.0f here ensures that max
+        // distance is greater than min distance. For a min distance of zero,
+        // near field effect will be fully on when the source distance is 0.1.
+        resonance_audio->api->SetSourceDistanceModel(
+            state->source_id, DistanceRolloffModel::kNone, state->min_distance,
+            state->min_distance + 1.0f);
+        return FMOD_OK;
+    }
     case SourceParams::kAttributes3D:
       FMOD_DSP_PARAMETER_3DATTRIBUTES* param =
           reinterpret_cast<FMOD_DSP_PARAMETER_3DATTRIBUTES*>(data);
@@ -1059,12 +1044,6 @@ FMOD_RESULT F_CALLBACK SourceGetParamFloatCallback(FMOD_DSP_STATE* dsp_state,
       return FMOD_OK;
     case SourceParams::kSpread:
       *value = state->spread;
-      return FMOD_OK;
-    case SourceParams::kDistanceMin:
-      *value = state->min_distance;
-      return FMOD_OK;
-    case SourceParams::kDistanceMax:
-      *value = state->max_distance;
       return FMOD_OK;
     case SourceParams::kOcclusionIntensity:
       *value = state->occlusion;
@@ -1159,6 +1138,8 @@ F_EXPORT FMOD_PLUGINLIST* F_CALL FMODGetPluginDescriptionList() {
 }  // namespace fmod
 }  // namespace vraudio
 
+extern "C" {
+
 F_EXPORT FMOD_DSP_DESCRIPTION* F_CALL
 FMOD_ResonanceAudioListener_GetDSPDescription() {
   // Listener plugin parameters.
@@ -1179,3 +1160,5 @@ FMOD_ResonanceAudioSource_GetDSPDescription() {
   vraudio::fmod::InitializeSourcePluginParameters();
   return &vraudio::fmod::SourceDesc;
 }
+
+}  // extern C
